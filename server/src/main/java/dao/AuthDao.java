@@ -15,7 +15,6 @@ public class AuthDao extends BaseDao<AuthDto> {
     super(collection);
   }
 
-
   public static AuthDao getInstance(){
     if(instance != null){
       return instance;
