@@ -156,7 +156,7 @@ function App() {
 
         <div>
           {/* Labels who sent the message */}
-          {messageThread.map(messageDto => <div>{messageDto.fromId + ": " + messageDto.message + " at: " + messageDto.timestamp}</div>)}
+          {messageThread.map(messageDto => <div>{messageDto.fromId + ": " + messageDto.message + " at: " + messageDto.convertedTimestamp}</div>)}
         </div>           
 
       </div>

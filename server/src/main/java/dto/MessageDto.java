@@ -14,6 +14,8 @@ public class MessageDto extends BaseDto{
   private Long timestamp;
   private String conversationId;
 
+  private String convertedTimestamp;
+
   public MessageDto(){
     timestamp = Instant.now().toEpochMilli();
   }
@@ -21,6 +23,8 @@ public class MessageDto extends BaseDto{
   public MessageDto(String uniqueId) {
     super(uniqueId);
     timestamp = Instant.now().toEpochMilli();
+    // Should convert the original timestamp value to local time theoretically
+    convertedTimestamp = (LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.UTC).toString());
   }
 
   public String getFromId() {
@@ -43,22 +47,23 @@ public class MessageDto extends BaseDto{
     return message;
   }
 
+
   public void setMessage(String message) {
     this.message = message;
   }
 
-  public LocalDateTime getTimestamp()
-  {
-    // Should convert the original timestamp value to local time theoretically
-    return LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.UTC);
-  }
-
-  /* Original timestamp return function
+  /* Original timestamp return function  */
   public Long getTimestamp()
   {
     return timestamp;
   }
-   */
+
+  public String getconvertedTimestamp()
+  {
+    return convertedTimestamp;
+  }
+
+
 
 
   public void setConversationId(String conversationId) {
@@ -75,7 +80,8 @@ public class MessageDto extends BaseDto{
         .append("toId", toId)
         .append("message", message)
         .append("timestamp", timestamp)
-        .append("conversationId", conversationId);
+        .append("conversationId", conversationId)
+        .append("convertedTimestamp", convertedTimestamp);
   }
 
   public static MessageDto fromDocument(Document document) {
@@ -84,7 +90,7 @@ public class MessageDto extends BaseDto{
     message.setFromId(document.getString("fromId"));
     message.setToId(document.getString("toId"));
     message.timestamp = document.getLong("timestamp");
-    message.conversationId = document.getString("conversationId");
+    message.conversationId = document.getString("convertedTimestamp");
     return message;
   }
 }
