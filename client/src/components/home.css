@@ -1,0 +1,22 @@
+
+
+.center-text {
+    text-align: center;
+}
+
+.top-space {
+    margin-top: 20px;
+}
+
+.message-box {
+    padding: 76px;
+    border: 6px solid black;
+    width: 20%;
+    margin-top: 57px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
