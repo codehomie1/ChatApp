@@ -18,6 +18,33 @@ function App() {
   // new state variable for list of convos
   const [conversations, setConversations] = React.useState([]); // default empty array
 
+  // Variables for use in displaying conversation history (View sent messages)
+  const [conversationId, setConversationId] = React.useState(''); // Default value set to string, used when a user clicks on a thread
+  const [messageThread, setMessageThread] = React.useState([]); // Default value set to array
+
+  React.useEffect(() => {
+    // This is run any time that conversationId is changed (on click, for example)
+    getConversation(); // Get the conversation related to this new conversationId
+  }, [conversationId]);
+
+  async function getConversation() {  // For getConversation endpoint
+    const httpSettings = {
+      method: 'GET',
+      headers: {
+        auth: cookies.get('auth'), // utility to retrive cookie from cookies
+      }
+    };
+    const result = await fetch('/getConversation?conversationId=' + conversationId, httpSettings); // Get the conversation ID and store it
+    const apiRes = await result.json();
+    console.log(apiRes);
+    if (apiRes.status) {
+      // worked
+      setMessageThread(apiRes.data); // java side should return list of all messages in this thread (from conversation ID)
+    } else {
+      setErrorMessage(apiRes.message);
+    }
+  }
+
   async function getConversations() {
     const httpSettings = {
       method: 'GET',
@@ -124,7 +151,14 @@ function App() {
           <button onClick={handleSendMessage}>Send Message</button>
         </div>
         <div>{errorMessage}</div>
-        <div>{conversations.map(conversation => <div>Convo: {conversation.conversationId}</div>)}</div>
+        <div>{conversations.map(conversation => <div onClick={() => setConversationId(conversation.conversationId)}>Convo: {conversation.conversationId}</div>)}</div>
+        <h3>Selected Conversation: {conversationId}</h3>
+
+        <div>
+          {/* Labels who sent the message */}
+          {messageThread.map(messageDto => <div>{messageDto.fromId + ": " + messageDto.message + " at: " + messageDto.timestamp}</div>)}
+        </div>           
+
       </div>
     );
   }

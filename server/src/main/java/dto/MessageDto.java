@@ -2,6 +2,9 @@ package dto;
 
 import java.time.Instant;
 import org.bson.Document;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.ZoneId;
 
 public class MessageDto extends BaseDto{
 
@@ -44,9 +47,19 @@ public class MessageDto extends BaseDto{
     this.message = message;
   }
 
-  public Long getTimestamp() {
+  public LocalDateTime getTimestamp()
+  {
+    // Should convert the original timestamp value to local time theoretically
+    return LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.UTC);
+  }
+
+  /* Original timestamp return function
+  public Long getTimestamp()
+  {
     return timestamp;
   }
+   */
+
 
   public void setConversationId(String conversationId) {
     this.conversationId = conversationId;
