@@ -52,7 +52,7 @@ function App() {
     console.log(apiRes);
     if (apiRes.status) {
       // user was created
-      setErrorMessage(apiRes.message);
+      // todo
     } else {
       // some error message
       setErrorMessage(apiRes.message);
@@ -104,8 +104,8 @@ function App() {
     console.log(apiRes);
     if (apiRes.status) {
       // worked
-      setMessage(''); // reset mssg
-      getConversations(); // get all conversations
+      setMessage('');
+      getConversations();
     } else {
       setErrorMessage(apiRes.message);
     }
@@ -131,22 +131,14 @@ function App() {
 
   return (
     <div className="App">
-      <div className='main-container'>
-        <h1>Chat App</h1>
-          Username: 
-          <input value={userName} onChange={e => setUserName(e.target.value)} />
-          Password: <input value={password} onChange={e => setPassword(e.target.value)} type="password" />
-          <div></div>
-          <div className='buttons'>
-          <button onClick={handleSubmit} disabled={isLoading}>Register</button>
-          <button onClick={handleLogIn} disabled={isLoading}>Log in</button>
-          </div>
-          
-          <div>
-            {isLoading ? 'Loading ...' : null}
-          </div>
-          <div>{errorMessage}</div>
+      <input value={userName} onChange={e => setUserName(e.target.value)} />
+      <input value={password} onChange={e => setPassword(e.target.value)} type="password" />
+      <button onClick={handleSubmit} disabled={isLoading}>Register</button>
+      <button onClick={handleLogIn} disabled={isLoading}>Log in</button>
+      <div>
+        {isLoading ? 'Loading ...' : null}
       </div>
+      <div>{errorMessage}</div>
     </div>
   );
 }
