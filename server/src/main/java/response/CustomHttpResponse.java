@@ -21,11 +21,13 @@ public class CustomHttpResponse {
   public String toString(){
     String headerString = "";
     for(Entry<String,String> header:  headers.entrySet()){
+      // Iterates through the map and adds each key/value pair to header string
       headerString += header.getKey() + ": " + header.getValue() + "\r\n";
     }
     String res = version + " " + status + "\n" + headerString;
 
     if(body != null){
+      // If there is a body, add on an empty line
       res += "\n" + body;
     }
 
