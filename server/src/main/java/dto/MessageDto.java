@@ -22,6 +22,7 @@ public class MessageDto extends BaseDto{
 
   public MessageDto(String uniqueId) {
     super(uniqueId);
+    //timestamp = Instant.now().toEpochMilli();
     timestamp = Instant.now().toEpochMilli();
     // Should convert the original timestamp value to local time theoretically
     convertedTimestamp = (LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.UTC).toString());
@@ -90,7 +91,7 @@ public class MessageDto extends BaseDto{
     message.setFromId(document.getString("fromId"));
     message.setToId(document.getString("toId"));
     message.timestamp = document.getLong("timestamp");
-    message.conversationId = document.getString("convertedTimestamp");
+    message.convertedTimestamp = document.getString("convertedTimestamp");
     return message;
   }
 }
