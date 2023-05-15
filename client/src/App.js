@@ -153,26 +153,20 @@ function App() {
         </div>
 
         {/* Cursed logo at the top of the page */}
-        <div id="logo"><img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81pmLrQ_SYhRhw4N99g5bhuYYGGrjGegXlEjuA8vBQ4PTRNVXFa2DM1JTR9l30zSsjoMcSXa9JDAMRbqX6L2HYrBatzg=s2560" alt="Dollar Store Discord" width={250} height={125}/> </div>
 
-    {/* Experimental Navbar for testing CSS, not quite working properly yet */}
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-0">
-        <a href="index.html" class="navbar-brand d-block d-lg-none">
-            <h1 class="m-0 text-uppercase text-white"><i class="fa fa-birthday-cake fs-1 text-primary me-3"></i>Cope Zone</h1>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto mx-lg-auto py-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="placeholder1.html" class="nav-item nav-link">Placeholder 1</a>
-                <a href="placeholder2.html" class="nav-item nav-link">Placeholder 2</a>
-                <a href="placeholder3.html" class="nav-item nav-link">Placeholder 3</a>
-            </div>
-        </div>
-    </nav>
- 
+        <div id='logo'> <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81pmLrQ_SYhRhw4N99g5bhuYYGGrjGegXlEjuA8vBQ4PTRNVXFa2DM1JTR9l30zSsjoMcSXa9JDAMRbqX6L2HYrBatzg=s2560" alt="Dollar Store Discord" width={250} height={125} /> </div>
+
+
+        {/* Experimental Horizontal Navbar for testing CSS*/}
+        <nav id='NavbarPrimary'>
+          <ul>
+            <li><a href="index.html" class="active">Home              </a></li>
+            <li><a href="placeholder1.html" class="link">Placeholder 1</a></li>
+            <li><a href="placeholder2.html" class="link">Placeholder 2</a></li>
+            <li><a href="placeholder3.html" class="link">Placeholder 3</a></li>
+          </ul>
+        </nav>
+
 
         {/* WIP Sidebar used in the app_custom2 css, currently not enabled
         <div id="colTwo">
@@ -190,7 +184,8 @@ function App() {
 
         */}
 
-        <h1>Welcome {userName}</h1>
+        <h1 id="welcome">Welcome {userName}</h1>
+        <div id='sendMessageAboveTo'>Send a message!</div>
         <div>
           To: <input value={toId} onChange={e => setToId(e.target.value)} />
         </div>
@@ -201,7 +196,7 @@ function App() {
         <div>{errorMessage}</div>
 
         <br></br>
-        <h2>Your Conversations</h2>
+        <h2 id="yourConversations">Your Conversations</h2>
 
         {/* Pre-edited conversation viewer text */}
         {/* 
@@ -215,13 +210,13 @@ function App() {
           {/* Breaks to have a line between the label of conversation and who was in it */}
           <br></br><br></br> </div>)} </div>
 
-        <h4>Selected Conversation: {conversationId}</h4>
+        <h4 id='selectedConversation'>Selected Conversation: {conversationId}</h4>
 
         <div>
           {/* Labels who sent the message */}
           {messageThread.map(messageDto => <div>{messageDto.fromId + " : " + messageDto.message}</div>)}
         </div>
-      </div> 
+      </div>
     );
   }
 

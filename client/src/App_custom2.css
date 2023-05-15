@@ -3,11 +3,12 @@ body {
 	padding: 0;
 	background: #191919 url(images/img1.gif) repeat-x;
 	font: normal small "Trebuchet MS", Arial, Helvetica, sans-serif;
-	color: #999999;
+	color: #129cff; /* Main body text color */
+	/* color: #999999; */
 }
 
 a {
-	border-bottom: 1px dotted #7D9412;
+	/* border-bottom: 1px dotted #7D9412; */
 	text-decoration: none;
 	color: #F2900B;
 }
@@ -20,7 +21,6 @@ a:hover {
 
 /* Logo image */
 #logo {
-	height: 40vmin;
   	pointer-events: none;
 	text-align: center;
 }
@@ -29,6 +29,77 @@ a:hover {
 .App {
 	text-align: center;
 }
+
+/* Welcome message formatting */
+#welcome {
+	font-size: 3em;
+	color: #F2900B;
+}
+
+/* Welcome message username formatting (name of the currently logged in user)
+Reverted, no longer in effect, but leaving it here in case
+*/
+#userNameWelcome {
+	color: #F2900B;
+	display: inline; /* Make it show on the same line as Welcome */
+}
+
+#sendMessageAboveTo {
+	font-size: 1.5em;
+	margin-bottom: 5px;
+}
+
+/* 'Your conversations' header */
+#yourConversations {
+	color: #F2900B;
+	font-size: 2em;
+}
+
+/* Selected conversation header */
+#selectedConversation {
+	font-style: bold;
+	color: #F2900B;
+	font-size: 1.5em;
+}
+
+
+/* Styling for the navigation bar */
+#NavbarPrimary {
+	font-family: 'Oswald', sans-serif;
+	font-size: 1.5em;
+	font-weight: 500;
+	padding: 5px 5px;
+	}
+
+	#NavbarPrimary ul{
+		margin-left: 30%;
+		margin-right: 30%;
+		padding: 10px;
+		background-color: rgb(33, 33, 33);
+		border-style: groove;
+		border-radius: 25px;
+		border-color: rgb(205, 72, 0);
+		align-self: center;
+	}
+
+	#NavbarPrimary li{
+		display: inline;
+		padding: 8px;
+		background-color: rgb(46, 46, 46);
+		border-style: groove;
+		border-radius: 20px 20px 20px;
+		border-color: black;
+		
+	}
+
+
+
+
+
+
+
+
+
 
 /* Header */
 
@@ -51,6 +122,7 @@ a:hover {
 #header h1 {
 	letter-spacing: -4px;
 	font-size: 4em;
+	
 }
 
 #header h2 {
@@ -146,31 +218,4 @@ a:hover {
 }
 
 #submit1 {
-}
-
-
-.navbar-dark .navbar-nav .nav-link {
-    font-family: 'Oswald', sans-serif;
-    padding: 30px 15px;
-    font-size: 18px;
-    font-weight: 500;
-    text-transform: uppercase;
-    color: var(--light);
-    outline: none;
-    transition: .5s;
-}
-
-.sticky-top.navbar-dark .navbar-nav .nav-link {
-    padding: 20px 15px;
-}
-
-.navbar-dark .navbar-nav .nav-link:hover,
-.navbar-dark .navbar-nav .nav-link.active {
-    color: var(--primary);
-}
-
-@media (max-width: 991.98px) {
-    .navbar-dark .navbar-nav .nav-link  {
-        padding: 10px 0;
-    }
 }
