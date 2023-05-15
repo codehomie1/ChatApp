@@ -17,4 +17,11 @@ Reactions, similar to discord reaction,
 Have some icon appear when mousing over a message that lets you select from a couple reaction images
 These will then be added into that message div?
 
+Alternative feature plan if the above does not work:
+Add readable timestamps to conversations
+Convert conversation display to something more readable current is "Convo: user_user2"
+Would like this to instead be something like "Conversation with [not current user]"
+
+Possibly multiple pages on the website
+
 Would like to add some CSS styling so it doesn't look so plain, however main features above come first

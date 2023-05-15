@@ -142,6 +142,10 @@ function App() {
   if (isLoggedIn) {
     return (
       <div className="App">
+
+        {/* Logo at the top of the page */}
+        <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81rsnKsRV4E6AR3x5S15VN-g_WnFGfiAk_jfp9zXL2LioxGQz-xYXVPytHCu7VepuO4qSjbb7IwTgQU1cAeWuRc2X9Is2Q=s2560" alt="Dollar Store Discord" width="500" height="250"/>
+
         <h1>Welcome {userName}</h1>
         <div>
           To: <input value={toId} onChange={e => setToId(e.target.value)} />
@@ -151,8 +155,23 @@ function App() {
           <button onClick={handleSendMessage}>Send Message</button>
         </div>
         <div>{errorMessage}</div>
-        <div>{conversations.map(conversation => <div onClick={() => setConversationId(conversation.conversationId)}>Convo: {conversation.conversationId}</div>)}</div>
-        <h3>Selected Conversation: {conversationId}</h3>
+        
+        <br></br>
+        <h2>Your Conversations</h2>
+
+        {/* Pre-edited conversation viewer text */}
+        {/* 
+          <div>{conversations.map(conversation => <div onClick={() => setConversationId(conversation.conversationId)}>Convo: {conversation.conversationId}</div>)}</div>
+         */}
+        
+
+        {/* Attempt at making conversations more readable */}
+        <div>{conversations.map(conversation => <div onClick={() => setConversationId(conversation.conversationId)}>
+        Conversation: <br></br> {conversation.conversationId}
+        {/* Breaks to have a line between the label of conversation and who was in it */}
+         <br></br><br></br> </div>)} </div>
+        
+        <h4>Selected Conversation: {conversationId}</h4>
 
         <div>
           {/* Labels who sent the message */}
