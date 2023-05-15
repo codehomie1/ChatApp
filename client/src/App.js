@@ -1,4 +1,5 @@
-import './App.css';
+import './App_custom2.css';
+//import './css/bootstrap.min.css'
 import React from 'react';
 import Cookies from 'universal-cookie';
 
@@ -143,8 +144,49 @@ function App() {
     return (
       <div className="App">
 
-        {/* Logo at the top of the page */}
-        <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81rsnKsRV4E6AR3x5S15VN-g_WnFGfiAk_jfp9zXL2LioxGQz-xYXVPytHCu7VepuO4qSjbb7IwTgQU1cAeWuRc2X9Is2Q=s2560" alt="Dollar Store Discord" width="500" height="250"/>
+        {/* Website name and slogan */}
+        <div id="header">
+          <h1>Dollar Store Discord</h1>
+          <h2><a href="#">Like Discord, but worse</a></h2>
+        </div>
+
+        {/* Cursed logo at the top of the page */}
+        <div id="logo"><img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81pmLrQ_SYhRhw4N99g5bhuYYGGrjGegXlEjuA8vBQ4PTRNVXFa2DM1JTR9l30zSsjoMcSXa9JDAMRbqX6L2HYrBatzg=s2560" alt="Dollar Store Discord" width={250} height={125}/> </div>
+
+    {/* Experimental Navbar for testing CSS, not quite working properly yet */}
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-0">
+        <a href="index.html" class="navbar-brand d-block d-lg-none">
+            <h1 class="m-0 text-uppercase text-white"><i class="fa fa-birthday-cake fs-1 text-primary me-3"></i>Cope Zone</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto mx-lg-auto py-0">
+                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="placeholder1.html" class="nav-item nav-link">Placeholder 1</a>
+                <a href="placeholder2.html" class="nav-item nav-link">Placeholder 2</a>
+                <a href="placeholder3.html" class="nav-item nav-link">Placeholder 3</a>
+            </div>
+        </div>
+    </nav>
+ 
+
+        {/* WIP Sidebar used in the app_custom2 css, currently not enabled
+        <div id="colTwo">
+          <ul>
+            <li>
+              <h2>Placeholder for Pages</h2>
+              <ul>
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">My Profile</a></li>
+                <li><a href="#">Other Users</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        */}
 
         <h1>Welcome {userName}</h1>
         <div>
@@ -155,7 +197,7 @@ function App() {
           <button onClick={handleSendMessage}>Send Message</button>
         </div>
         <div>{errorMessage}</div>
-        
+
         <br></br>
         <h2>Your Conversations</h2>
 
@@ -163,22 +205,21 @@ function App() {
         {/* 
           <div>{conversations.map(conversation => <div onClick={() => setConversationId(conversation.conversationId)}>Convo: {conversation.conversationId}</div>)}</div>
          */}
-        
+
 
         {/* Attempt at making conversations more readable */}
         <div>{conversations.map(conversation => <div onClick={() => setConversationId(conversation.conversationId)}>
-        Conversation: <br></br> {conversation.conversationId}
-        {/* Breaks to have a line between the label of conversation and who was in it */}
-         <br></br><br></br> </div>)} </div>
-        
+          Conversation: <br></br> {conversation.conversationId}
+          {/* Breaks to have a line between the label of conversation and who was in it */}
+          <br></br><br></br> </div>)} </div>
+
         <h4>Selected Conversation: {conversationId}</h4>
 
         <div>
           {/* Labels who sent the message */}
           {messageThread.map(messageDto => <div>{messageDto.fromId + " : " + messageDto.message}</div>)}
-        </div>           
-
-      </div>
+        </div>
+      </div> 
     );
   }
 
