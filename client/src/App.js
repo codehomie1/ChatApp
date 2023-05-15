@@ -134,6 +134,7 @@ function App() {
       // worked
       setMessage('');
       getConversations();
+      setConversationId(apiRes.data[0].conversationId) // Should automatically switch to whatever conversation the user just sent a message to
     } else {
       setErrorMessage(apiRes.message);
     }
