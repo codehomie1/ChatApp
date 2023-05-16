@@ -63,9 +63,13 @@
     margin-top: 57px;
     margin-right: auto;
     margin-left: 10vw;
-    text-align: center;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
+
+.message-box {
+    padding: 76px;
+    border: 6px solid black;
+    width: 20%;
+    margin-top: 57px;
+    margin-right: auto;
+    margin-left: auto;
     align-items: center;
 }

@@ -62,7 +62,6 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
   };
 
 
-
   React.useEffect(() => {
     getConversations()
 
@@ -100,7 +99,6 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                     <div>...</div>
                 </div>  
               </div>
-              
             </div>
             
           );
