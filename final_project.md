@@ -8,5 +8,4 @@ Each member will contribute 1 additional endpoint + a front end feature. It is u
 Each team member will receive and individual score based on their code contributions. 20% Shared score for the presentation. 
 
 # CodeHomies Feature
-
-My feature will be having users be able to search for other users
+My feature will be having users be able to view other users by adding a list of all users that are available to chat with.
