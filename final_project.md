@@ -7,21 +7,15 @@ Each member will contribute 1 additional endpoint + a front end feature. It is u
 
 Each team member will receive and individual score based on their code contributions. 20% Shared score for the presentation. 
 
-## Toaster Feature Plans
-Would like to add the ability to upload or set a profile picture, and also see other user profile pictures when in a conversation
-Would have to set a default picture for people who have not set one yet
-Not sure how ReactJS handles images but we'll see
+# CodeHomies Feature
 
-Secondary feature plan:
-Reactions, similar to discord reaction,
-Have some icon appear when mousing over a message that lets you select from a couple reaction images
-These will then be added into that message div?
+My feature will be having users be able to search for other users
 
-Alternative feature plan if the above does not work:
-Add readable timestamps to conversations
-Convert conversation display to something more readable current is "Convo: user_user2"
-Would like this to instead be something like "Conversation with [not current user]"
+# JaimeG2504 Feature
+I will do the add friends feature
 
-Possibly multiple pages on the website
+# MassiveInflatableToaster's Feature Plans
+I'm planning on having a way to upload profile pictures, and have them show up on the side of the conversation in smaller form (similar to discord). 
 
-Would like to add some CSS styling so it doesn't look so plain, however main features above come first
+If that works and I still have time I'd like to also have the ability to add reactions (upload a picture? or select from a few base ones)
+If that's not doable, then alternatively, readable timestamps for the messages because they don't seem to have any indicator right now and the existing timestamp variable is in epoch format (seems to be time offset of 1970)

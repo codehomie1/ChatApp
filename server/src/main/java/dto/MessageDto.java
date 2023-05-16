@@ -2,9 +2,6 @@ package dto;
 
 import java.time.Instant;
 import org.bson.Document;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.ZoneId;
 
 public class MessageDto extends BaseDto{
 
@@ -14,18 +11,13 @@ public class MessageDto extends BaseDto{
   private Long timestamp;
   private String conversationId;
 
-  private String convertedTimestamp;
-
   public MessageDto(){
     timestamp = Instant.now().toEpochMilli();
   }
 
   public MessageDto(String uniqueId) {
     super(uniqueId);
-    //timestamp = Instant.now().toEpochMilli();
     timestamp = Instant.now().toEpochMilli();
-    // Should convert the original timestamp value to local time theoretically
-    convertedTimestamp = (LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.UTC).toString());
   }
 
   public String getFromId() {
@@ -48,24 +40,13 @@ public class MessageDto extends BaseDto{
     return message;
   }
 
-
   public void setMessage(String message) {
     this.message = message;
   }
 
-  /* Original timestamp return function  */
-  public Long getTimestamp()
-  {
+  public Long getTimestamp() {
     return timestamp;
   }
-
-  public String getconvertedTimestamp()
-  {
-    return convertedTimestamp;
-  }
-
-
-
 
   public void setConversationId(String conversationId) {
     this.conversationId = conversationId;
@@ -81,8 +62,7 @@ public class MessageDto extends BaseDto{
         .append("toId", toId)
         .append("message", message)
         .append("timestamp", timestamp)
-        .append("conversationId", conversationId)
-        .append("convertedTimestamp", convertedTimestamp);
+        .append("conversationId", conversationId);
   }
 
   public static MessageDto fromDocument(Document document) {
@@ -91,7 +71,7 @@ public class MessageDto extends BaseDto{
     message.setFromId(document.getString("fromId"));
     message.setToId(document.getString("toId"));
     message.timestamp = document.getLong("timestamp");
-    message.convertedTimestamp = document.getString("convertedTimestamp");
+    message.conversationId = document.getString("conversationId");
     return message;
   }
 }
