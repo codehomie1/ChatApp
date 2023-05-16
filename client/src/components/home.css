@@ -41,6 +41,12 @@
     flex-direction: row-reverse;
 }
 
+.curr-users-box {
+    margin: 39px;
+    align-self: baseline;
+    width: 10%;;
+}
+
 .convo-box {
     padding: 15px;
     width: 343px;
@@ -63,13 +69,5 @@
     margin-top: 57px;
     margin-right: auto;
     margin-left: 10vw;
-
-.message-box {
-    padding: 76px;
-    border: 6px solid black;
-    width: 20%;
-    margin-top: 57px;
-    margin-right: auto;
-    margin-left: auto;
-    align-items: center;
 }
+

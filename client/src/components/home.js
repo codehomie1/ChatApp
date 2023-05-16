@@ -61,11 +61,11 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     setIsLoading(false);
   };
 
-
+  // renders getConversations once
   React.useEffect(() => {
     getConversations()
 
-  })
+  }, []);
   
     return (
 
@@ -90,7 +90,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                     </div>)}
                 </div>
                 </div>
-                <div>
+                <div className='curr-users-box'>
                     <h3>Current Users:</h3>
                     <div>List users here</div>
                     <div>...</div>
