@@ -61,6 +61,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     setIsLoading(false);
   };
 
+
   React.useEffect(() => {
     getConversations()
 
@@ -69,19 +70,35 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     return (
 
             <div className="homepage-container">
-              <h1 className='center-text'>Welcome {userName}</h1>
-              <div className='message-box'>
-                <div>
-                  To: <input value={toId} onChange={e => setToId(e.target.value)} />
+              <h1 className='home-title center-text'>Welcome {userName}</h1>
+              <div className='flex-container'>
+                <div className='message-box'>
+                  <h3 className='send-mess-title'>Send Message</h3>
+                  <div>
+                  <span className='right-padding'>To:</span><input className='to-padding' value={toId} onChange={e => setToId(e.target.value)} />
+                  </div>
+                  <textarea className='message-textarea' value={message} onChange={e => setMessage(e.target.value)} />
+                  <div>
+                    <button onClick={handleSendMessage}>Send Message</button>
+                    <div className='top-space'>{errorMessage}</div>
+                  </div>
                 </div>
-                <textarea value={message} onChange={e => setMessage(e.target.value)} />
                 <div>
-                  <button onClick={handleSendMessage}>Send Message</button>
+                <div className='convo-box center-text top-space'>
+                  <h3 className='curr-convo-title center-text'>Current Convos</h3>
+                    {conversations.map(conversation => <div>Convo: {conversation.conversationId}
+                    </div>)}
+                </div>
+                </div>
+                <div>
+                    <h3>Current Users:</h3>
+                    <div>List users here</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
+                    <div>...</div>
                 </div>  
               </div>
-              
-              <div>{errorMessage}</div>
-              <div className='center-text top-space'>{conversations.map(conversation => <div>Convo: {conversation.conversationId}</div>)}</div>
             </div>
             
           );
