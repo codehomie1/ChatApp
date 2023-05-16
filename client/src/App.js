@@ -41,6 +41,9 @@ function App() {
     if (apiRes.status) {
       // worked
       setMessageThread(apiRes.data); // java side should return list of all messages in this thread (from conversation ID)
+      setTimeout(getConversation, 2500); // Should refresh conversations every 2.5 seconds so any incoming messages will display
+                                          // Without this, you won't see these new messages unless you refresh the conversation manually (or by sending a message yourself, which re-fetches it)
+
     } else {
       setErrorMessage(apiRes.message);
     }
