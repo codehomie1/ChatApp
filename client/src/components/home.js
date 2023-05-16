@@ -84,7 +84,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                   </div>
                 </div>
                 <div>
-                <div className='convo-box center-text top-space'>
+                <div className='convo-box center-text'>
                   <h3 className='curr-convo-title center-text'>Current Convos</h3>
                     {conversations.map(conversation => <div>Convo: {conversation.conversationId}
                     </div>)}
@@ -97,7 +97,13 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                     <div>...</div>
                     <div>...</div>
                     <div>...</div>
-                </div>  
+                </div>
+                <div className='view-messages-box'>
+                  <div className='view-mssg-title'>View messages</div>
+                  <div class="mssg-text">Add messages here</div>
+                  <div>...</div>
+                  <div>...</div>
+                </div>
               </div>
             </div>
             
