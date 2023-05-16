@@ -11,7 +11,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
    const [message, setMessage] = React.useState('');
 
    const [conversations, setConversations] = React.useState([]); // default empty array
-
+   const [users, setUsers] = React.useState([]);
 
    async function getConversations() {
     const httpSettings = {
@@ -22,7 +22,6 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     };
     const result = await fetch('/getConversations', httpSettings);
     const apiRes = await result.json();
-    console.log(apiRes);
     if (apiRes.status) {
       // worked
       setConversations(apiRes.data); // java side should return list of all convos for this user
@@ -61,11 +60,27 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     setIsLoading(false);
   };
 
-  // renders getConversations once
-  React.useEffect(() => {
-    getConversations()
+  async function getAllUsers() {
+    setErrorMessage('')
+    const httpSettings = {
+      method: 'GET',
+      headers: {
+        auth: cookies.get('auth'), // utility to retrive cookie from cookies
+      }
+    };
+    const result = await fetch('/getAllUsers', httpSettings);
+    const apiRes = await result.json();
+    console.log(apiRes);
+    if (apiRes.status) {
+      // worked
+      setUsers(apiRes.data); // java side should return list of all convos for this user
+    } else {
+      setUsers(apiRes.message);
+    }
+  }
 
-  }, []);
+  // renders getConversations once
+  React.useEffect(() => { getConversations(); getAllUsers(); }, []);
   
     return (
 
@@ -92,11 +107,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                 </div>
                 <div className='curr-users-box'>
                     <h3>Current Users:</h3>
-                    <div>List users here</div>
-                    <div>...</div>
-                    <div>...</div>
-                    <div>...</div>
-                    <div>...</div>
+                    { users.map(user => <div className='to-padding'> {user.userName} </div>)}
                 </div>
                 <div className='view-messages-box'>
                   <div className='view-mssg-title'>View messages</div>
