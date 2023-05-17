@@ -12,3 +12,9 @@ My endpoint feature allows current logged in users to see a list of all register
 My front-end contributions includes includes
 - styling login page
 - styling home page 
+
+# MassiveInflatableToaster's Feature Plans
+I'm planning on having a way to upload profile pictures, and have them show up on the side of the conversation in smaller form (similar to discord). 
+
+If that works and I still have time I'd like to also have the ability to add reactions (upload a picture? or select from a few base ones)
+If that's not doable, then alternatively, readable timestamps for the messages because they don't seem to have any indicator right now and the existing timestamp variable is in epoch format (seems to be time offset of 1970)

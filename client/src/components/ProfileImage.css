@@ -1,0 +1,38 @@
+/* This one is medium size, and is intended for displaying on the page as a profile image in a corner, for example */
+.defaultFormatting{
+    width: 150px;
+    height: 150px;
+    object-fit:fill;
+    object-position: center;
+    border: 2px solid black;
+}
+
+
+/* Custom class types
+When putting element on homepage, use like this: 
+<ProfileImage className="chatSize" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
+
+<ProfileImage className="largeRound" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
+
+*/
+
+/* Same size as default but has a rounded shape */
+.largeRound{
+    width: 150px;
+    height: 150px;
+    object-fit:fill;
+    object-position: center;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+/* This one is really small and rounded, and is intended for the chat box rows */
+.chatSize{
+    width: 35px;
+    height: 35px;
+    object-fit:fill;
+    object-position: center;
+    border: 2px solid black;
+    border-radius: 50%;
+    display: inline;
+}
