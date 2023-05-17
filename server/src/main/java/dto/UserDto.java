@@ -31,6 +31,13 @@ public class UserDto extends BaseDto{
     this.password = password;
   }
 
+
+  // Default Profile Picture is blank
+  private String profileURL = "";
+  public String getProfileURL() { return profileURL; }
+  public void setProfileURL(String profileURL) { this.profileURL = profileURL; }
+
+
   public Document toDocument(){
     return new Document()
         .append("userName", userName)
@@ -41,6 +48,7 @@ public class UserDto extends BaseDto{
     var userDto = new UserDto();
     userDto.setUserName(match.getString("userName"));
     userDto.setPassword(match.getString("password"));
+    userDto.setProfileURL(match.getString("profileURL"));
     return  userDto;
   }
 }

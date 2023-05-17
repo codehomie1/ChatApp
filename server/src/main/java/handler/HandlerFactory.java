@@ -18,6 +18,9 @@ public class HandlerFactory {
         return new CreateMessageHandler();
       case "/getAllUsers":
         return new GetAllUsersHandler();
+      case "/UploadPicture":
+        return new UploadPictureHandler();
+
       default:
         return new FallbackHandler();
     }
