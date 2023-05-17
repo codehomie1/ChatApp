@@ -2,6 +2,8 @@
 import './home.css';
 import React from 'react';
 
+import ProfileImage from "./ProfileImage";
+
 
 
 function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookies}) {
@@ -144,8 +146,24 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                 <div className='view-messages-box'>
                   {/* Placeholder name "Active Conversation", plan to change to display the user you are messaging*/}
                   <div className='view-mssg-title'>Active Conversation</div>
-                  <div class="mssg-text"> {messageThread.map(messageDto => <div>{messageDto.fromId + " : " + messageDto.message}</div>)} </div>
+                  <div></div>
+                  <div class="mssg-text">
+                    {/* Change the image source later*/}
+                   {messageThread.map(messageDto => <div>
+                    <ProfileImage className="chatSize" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
+                    {messageDto.fromId + " : " + messageDto.message}</div>)} </div>
                 </div>
+
+                
+                {/* This doesn't seem to work
+                {String userPicture = "https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560"}
+                <ProfileImage src=userPicture alt="Profile Image didn't render because you're on dialup internet"/>
+                */}
+
+                <ProfileImage src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
+                <ProfileImage className="chatSize" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
+                <ProfileImage className="largeRound" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
+
               </div>
             </div>
             
