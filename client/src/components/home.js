@@ -1,4 +1,3 @@
-
 import './home.css';
 import React from 'react';
 
@@ -14,6 +13,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
 
   // new state variable for list of convos
    const [conversations, setConversations] = React.useState([]); // default empty array
+   const [users, setUsers] = React.useState([]); // users array
 
    async function getConversations() {
     const httpSettings = {
@@ -120,11 +120,9 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     }
   }
 
-  // renders getConversations once
-  React.useEffect(() => {
-    getConversations()
-
-  }, []);
+    // renders getConversations once
+    // Also includes rendering getAllUsers
+    React.useEffect(() => { getConversations(); getAllUsers(); }, []);
 
   // Start of HTML display
     return (
@@ -159,7 +157,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                 </div>
                 <div className='view-messages-box'>
                   {/* Placeholder name "Active Conversation", plan to change to display the user you are messaging*/}
-                  <div className='view-mssg-title'>Active Conversation with {messageThread[0].toId}</div>
+                  <div className='view-mssg-title'>Active Conversation</div>
                   <div></div>
                   <div class="mssg-text">
                     {/* Change the image source later*/}
@@ -174,8 +172,12 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                 <ProfileImage src=userPicture alt="Profile Image didn't render because you're on dialup internet"/>
                 */}
 
+                {/*
+                Storage of alternate formats for ProfileImage
                 <ProfileImage src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
                 <ProfileImage className="chatSize" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
+                */}
+                
                 <ProfileImage className="largeRound" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
 
               </div>
