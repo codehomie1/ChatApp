@@ -43,4 +43,9 @@ public class MessageDao extends BaseDao<MessageDto> {
         .collect(Collectors.toList());
   }
 
+  public void delete(long timestamp) {
+    collection.deleteOne(new Document("timestamp", timestamp));
+  }
+
+
 }

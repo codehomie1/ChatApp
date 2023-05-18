@@ -22,6 +22,8 @@ public class HandlerFactory {
         return new SetUserPictureHandler();
       case "/GetUserPicture":
         return new GetUserPictureHandler();
+      case "/deleteMessage":
+        return new DeleteMessageHandler();
 
       default:
         return new FallbackHandler();

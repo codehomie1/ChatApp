@@ -120,6 +120,65 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     }
   }
 
+  async function handleDeleteMessage(messageDto) {
+    console.log(messageDto);
+    setIsLoading(true);
+    setErrorMessage('');
+
+    const httpSettings = {
+
+      method: 'GET',
+      headers: {
+        auth: cookies.get('auth'),
+      }
+    };
+    const result = await fetch('/deleteMessage?timestamp='+messageDto.timestamp, httpSettings);
+    const apiRes = await result.json();
+    console.log(apiRes);
+    getConversation();
+  }
+
+  
+  async function setUserPicture(String){
+    setErrorMessage("Error apparently")
+    const httpSettings = {
+      method: 'GET',
+      headers: {
+        auth: cookies.get('auth'), // utility to retrive cookie from cookies
+      }
+    };
+
+    const result = await fetch('/SetUserPicture?userName' +userName, httpSettings);
+    const apiRes = await result.json();
+    console.log(apiRes);
+    getConversation();
+
+  }
+
+
+  async function getUserProfile() {
+    setErrorMessage('')
+    const httpSettings = {
+      method: 'GET',
+      headers: {
+        auth: cookies.get('auth'), // Check if user is logged in
+      }
+    };
+    const result = await fetch('/GetUserPicture', httpSettings);
+    const apiRes = await result.json();
+    console.log(apiRes);
+    if (apiRes.status) {
+      // worked
+      setUsers(apiRes.data); // Should return the link of their profile picture
+    } else {
+      setUsers(apiRes.message);
+    }
+  }
+
+
+
+
+
     // renders getConversations once
     // Also includes rendering getAllUsers
     React.useEffect(() => { getConversations(); getAllUsers(); }, []);
@@ -163,7 +222,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                     {/* Change the image source later*/}
                    {messageThread.map(messageDto => <div>
                     <ProfileImage className="chatSize" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
-                    {messageDto.fromId + " : " + messageDto.message}</div>)} </div>
+                    {messageDto.fromId + " : " + messageDto.message}<button onClick={()=>handleDeleteMessage(messageDto)}> Delete </button></div>)} </div>
                 </div>
 
                 
@@ -179,6 +238,14 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                 */}
                 
                 <ProfileImage className="largeRound" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
+                
+                {/* Not working yet...
+                <button onClick={()=> setUserPicture(userName, "https://i.ytimg.com/vi/ndSqUwgcyMI/maxresdefault.jpg")}> Cope </button>
+                <div> <button onClick={()=> getUserProfile()}> getProfile </button> 
+                </div>
+                */}
+                
+
 
               </div>
             </div>
