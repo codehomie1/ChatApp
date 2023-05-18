@@ -233,10 +233,15 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
   // new state variable for profile picture?
   const [otherUserPictureLink, setOtherUserPictureLink] = React.useState('');
 
+  /*
+
   React.useEffect(() => {
     // This is run any time that their picture is changed (hopefully)
     getOtherUserPicture(); // Get the picture for this user
   }, [otherUserPictureLink]);
+  */
+  
+  
 
   async function getOtherUserPicture(incomingUser) {  // For getUserPicture endpoint
     const httpSettings = {
@@ -312,9 +317,11 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
             {messageThread.map(messageDto => <div>
                                    {/* {getOtherUserPicture(messageDto.fromId)} 
                                    <ProfileImage className="chatSize" src={otherUserPictureLink} alt="Profile Image"   />
+
+                                   <ProfileImage className="chatSize" src={otherUserPictureLink} alt="Profile Image"   />
                                    */}
-              <ProfileImage className="chatSize" src={otherUserPictureLink} alt="Profile Image"   />
-              <button onClick={() => getOtherUserPicture(messageDto.fromId)}>Refresh</button>
+              <ProfileImage className="chatSize" src={messageDto.userPicture} alt="Profile Image"   />
+              <button onClick={() => getOtherUserPicture(messageDto.userPicture)}>Refresh</button>
               {messageDto.fromId + " : " + messageDto.message}<button onClick={() => handleDeleteMessage(messageDto)}> Delete </button></div>)} </div>
 
         </div>

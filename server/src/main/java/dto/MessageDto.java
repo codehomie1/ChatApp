@@ -11,6 +11,8 @@ public class MessageDto extends BaseDto{
   private Long timestamp;
   private String conversationId;
 
+  private String userPicture;
+
   public MessageDto(){
     timestamp = Instant.now().toEpochMilli();
   }
@@ -56,13 +58,18 @@ public class MessageDto extends BaseDto{
     return conversationId;
   }
 
+  // Getter and setter for user picture message variant
+  public void setUserPicture(String userPicture) {this.userPicture = userPicture;}
+  public String getUserPicture () {return userPicture;};
+
   public Document toDocument(){
     return new Document()
         .append("fromId", fromId)
         .append("toId", toId)
         .append("message", message)
         .append("timestamp", timestamp)
-        .append("conversationId", conversationId);
+        .append("conversationId", conversationId)
+        .append("userPicture", userPicture);
   }
 
   public static MessageDto fromDocument(Document document) {
@@ -72,6 +79,7 @@ public class MessageDto extends BaseDto{
     message.setToId(document.getString("toId"));
     message.timestamp = document.getLong("timestamp");
     message.conversationId = document.getString("conversationId");
+    message.userPicture = document.getString("userPicture");
     return message;
   }
 }

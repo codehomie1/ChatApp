@@ -14,30 +14,8 @@ import java.util.List;
 
 
 public class GetUserPictureHandler implements BaseHandler {
-    /*
-    public HttpResponseBuilder handleRequest(ParsedRequest request) {
 
-        // Get current user instance
-        UserDao userDao = UserDao.getInstance();
-
-        // Check if user is logged in first to ensure proper authorization
-        AuthFilter.AuthResult authResult = AuthFilter.doFilter(request);
-        if(!authResult.isLoggedIn){ // If not logged in somehow, say unauthorized
-            return new HttpResponseBuilder().setStatus(StatusCodes.UNAUTHORIZED);
-        }
-
-
-        // This is not working, getQueryParam returns null...
-        var filter = new Document("profilePic", request.getQueryParam("profilePic"));
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        System.out.println("This retrieved: " + request.getQueryParam("profilePic"));
-        var res = new RestApiAppResponse<>(true, userDao.query(filter), null);
-        return new HttpResponseBuilder().setStatus("200 OK").setBody(res);
-
-    }
-    */
-
-    @Override
+        @Override
     public HttpResponseBuilder handleRequest(ParsedRequest request) {
         UserDao userDao = UserDao.getInstance();
 
