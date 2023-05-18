@@ -16,6 +16,15 @@ public class HandlerFactory {
         return new GetConversationHandler();
       case "/createMessage":
         return new CreateMessageHandler();
+      case "/getAllUsers":
+        return new GetAllUsersHandler();
+      case "/SetUserPicture":
+        return new SetUserPictureHandler();
+      case "/GetUserPicture":
+        return new GetUserPictureHandler();
+      case "/deleteMessage":
+        return new DeleteMessageHandler();
+
       default:
         return new FallbackHandler();
     }

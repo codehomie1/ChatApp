@@ -12,6 +12,7 @@ public class AuthFilter {
   }
 
   static AuthResult doFilter(ParsedRequest parsedRequest){
+
     AuthDao authDao = AuthDao.getInstance();
     var result = new AuthResult();
     String hash = parsedRequest.getHeaderValue("auth");
