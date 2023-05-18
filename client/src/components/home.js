@@ -310,8 +310,10 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
                     <ProfileImage className="chatSize" src="${getOtherUserPicture(messageDto.fromId)}"  alt="Profile Image"/>
                     */}
             {messageThread.map(messageDto => <div>
-                                   {/* {getOtherUserPicture(messageDto.fromId)} */}
-              <ProfileImage className="chatSize" src={otherUserPictureLink} alt="Profile Image" />
+                                   {/* {getOtherUserPicture(messageDto.fromId)} 
+                                   <ProfileImage className="chatSize" src={otherUserPictureLink} alt="Profile Image"   />
+                                   */}
+              <ProfileImage className="chatSize" src={otherUserPictureLink} alt="Profile Image"   />
               <button onClick={() => getOtherUserPicture(messageDto.fromId)}>Refresh</button>
               {messageDto.fromId + " : " + messageDto.message}<button onClick={() => handleDeleteMessage(messageDto)}> Delete </button></div>)} </div>
 
@@ -324,8 +326,10 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
                 <ProfileImage className="chatSize" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
                 */}
 
-        {/* WORKS NOW! Have to convert it to a submittable form box so you can customize it.*/}
+        {/* WORKS NOW! Have to convert it to a submittable form box so you can customize it.
         <button onClick={() => setUserPicture("https://media.tenor.com/fhMmSQ5khrYAAAAd/superlative-superlative-secret-society.gif")}> Force Set Picture to this link </button>
+        */}
+        
 
         {/* Renders the currently logged in user's profile picture in a big circle (largeRound) */}
         <div> <ProfileImage className="largeRound" src={LoggedInPictureLink} alt="Profile Image didn't render because you're on dialup internet" /> </div>
