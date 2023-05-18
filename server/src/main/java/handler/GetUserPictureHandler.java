@@ -18,7 +18,11 @@ public class GetUserPictureHandler implements BaseHandler {
             return new HttpResponseBuilder().setStatus(StatusCodes.UNAUTHORIZED);
         }
 
+
+        // This is not working, getQueryParam returns null...
         var filter = new Document("profilePic", request.getQueryParam("profilePic"));
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        System.out.println("This retrieved: " + request.getQueryParam("profilePic"));
         var res = new RestApiAppResponse<>(true, userDao.query(filter), null);
         return new HttpResponseBuilder().setStatus("200 OK").setBody(res);
 

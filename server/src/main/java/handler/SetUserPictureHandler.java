@@ -21,14 +21,19 @@ public class SetUserPictureHandler implements BaseHandler {
       return new HttpResponseBuilder().setStatus(StatusCodes.UNAUTHORIZED);
     }
 
+    System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+    System.out.println("The set picture handler got this back: " + request.getBody() +  "          _______________________ end");
     //userDao.changeProfilePic();
-    //var filter = new Document("profilePic", request.getQueryParam("profilePic"));
+    var filter = new Document("userName", request.getQueryParam("userName"));
+    System.out.println("Request query param username is: " + request.getQueryParam("userName"));
+
     //var changePic = new Document("profilePic", request.getQueryParam("profilePic"));
     //changePic.put("profilePic", "sosig.jpg");
-    userDao.changeProfilePic(request.getBody(), request.getBody());
+    //
+    // userDao.changeProfilePic(userDao, request.getBody());
 
 
-    var res = new RestApiAppResponse<>(true, null, null);
+    var res = new RestApiAppResponse<>(true, null, "test message back");
     return new HttpResponseBuilder().setStatus("200 OK").setBody(res);
   }
 

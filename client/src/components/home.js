@@ -15,6 +15,10 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
    const [conversations, setConversations] = React.useState([]); // default empty array
    const [users, setUsers] = React.useState([]); // users array
 
+  // new state variable for profile picture?
+  const [picture, getPicture] = React.useState('');
+  const [pictureLink, setPictureLink] = React.useState('');
+
    async function getConversations() {
     const httpSettings = {
       method: 'GET',
@@ -165,8 +169,8 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
   }
 
   
-  async function setUserPicture(String){
-    setErrorMessage("Error apparently")
+  async function setUserPicture(webURL){
+    setErrorMessage("")
     const httpSettings = {
       method: 'GET',
       headers: {
@@ -174,11 +178,16 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
       }
     };
 
-    const result = await fetch('/SetUserPicture?userName' +userName, httpSettings);
+    const result = await fetch('/SetUserPicture?userName' + userName + webURL, httpSettings);
     const apiRes = await result.json();
     console.log(apiRes);
-    getConversation();
-
+    if (apiRes.status) {
+      // worked
+      setPictureLink(apiRes.data); // I don't know 
+    } else {
+      setPictureLink(apiRes.message);
+    }
+    getUserProfile(); // Call get user profile to update any existing profile displays to the new one
   }
 
 
@@ -195,9 +204,9 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     console.log(apiRes);
     if (apiRes.status) {
       // worked
-      setUsers(apiRes.data); // Should return the link of their profile picture
+      getPicture(apiRes.data); // Should return the link of their profile picture
     } else {
-      setUsers(apiRes.message);
+      getPicture(apiRes.message);
     }
   }
 
@@ -268,11 +277,16 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                 
                 <ProfileImage className="largeRound" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
                 
-                {/* Not working yet...
-                <button onClick={()=> setUserPicture(userName, "https://i.ytimg.com/vi/ndSqUwgcyMI/maxresdefault.jpg")}> Cope </button>
-                <div> <button onClick={()=> getUserProfile()}> getProfile </button> 
+                
+                {/* Not working yet... */}
+                <button onClick={()=> setUserPicture("https://i.ytimg.com/vi/ndSqUwgcyMI/maxresdefault.jpg")}> Cope </button>
+
+                {/* Debug button to test retrieval of a user profile value */}
+                <div> <button onClick={()=> getUserProfile()}> 
+                getProfile</button> 
                 </div>
-                */}
+                
+                
                 
 
 
