@@ -1,6 +1,9 @@
 import './home.css';
 import React from 'react';
 
+
+
+
 import ProfileImage from "./ProfileImage";
 
 
@@ -16,6 +19,10 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
    const [users, setUsers] = React.useState([]); // users array
 
    async function getConversations() {
+    if (!conversationId) {
+      setConversations([]); // If conversationId is not set, clear the message thread
+      return;
+    }
     const httpSettings = {
       method: 'GET',
       headers: {
@@ -46,6 +53,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
   }, [conversationId]);
 
   async function getConversation() {  // For getConversation endpoint
+    
     const httpSettings = {
       method: 'GET',
       headers: {
@@ -103,11 +111,17 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     setIsLoading(false);
   };
   async function handleDeleteMessage(messageDto) {
-    
-    
     console.log(messageDto);
     setIsLoading(true);
     setErrorMessage('');
+
+
+  // Check if the message belongs to the current user
+  if (messageDto.fromId !== userName) {
+    alert("You can only delete your own messages.");
+    setIsLoading(false);
+    return;
+  }
     
     const httpSettings = {
       
@@ -119,12 +133,14 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     const result = await fetch('/deleteMessage?timestamp='+messageDto.timestamp, httpSettings);
     const apiRes = await result.json();
     console.log(apiRes);
-    setConversations([]);
-    // if (apiRes.status) {
-    // } else {
-    //   setErrorMessage(apiRes.message);
-    // }
-    // setIsLoading(false);
+    if (apiRes.status) {
+      // setConversationId(messageDto.conversationId);
+      getConversation();
+      getConversations();
+    } else {
+      setErrorMessage(apiRes.message);
+    }
+    setIsLoading(false);
   }
 
   async function getAllUsers() {
@@ -156,17 +172,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
             <div className="homepage-container">
               <h1 className='home-title center-text'>Welcome {userName}</h1>
               <div className='flex-container'>
-                <div className='message-box'>
-                  <h3 className='send-mess-title'>Send Message</h3>
-                  <div>
-                  <span className='right-padding'>To:</span><input className='to-padding' value={toId} onChange={e => setToId(e.target.value)} />
-                  </div>
-                  <textarea className='message-textarea' value={message} onChange={e => setMessage(e.target.value)} />
-                  <div>
-                    <button onClick={handleSendMessage}>Send Message</button>
-                    <div className='top-space'>{errorMessage}</div>
-                  </div>
-                </div>
+              
                 <div>
                 <div className='convo-box center-text'>
                   <h3 className='curr-convo-title center-text'>Your Conversations</h3>
@@ -179,10 +185,8 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                     </>)} </div>
                 </div>
                 </div>
-                <div className='curr-users-box'>
-                    <h3>Current Users:</h3>
-                    { users.map(user => <div className='to-padding'> {user.userName} </div>)}
-                </div>
+               
+                <div className ="convoWrapper">
                 <div className='view-messages-box'>
                   {/* Placeholder name "Active Conversation", plan to change to display the user you are messaging*/}
                   <div className='view-mssg-title'>Active Conversation</div>
@@ -192,9 +196,23 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                    {messageThread.map(messageDto => <div>
                     <ProfileImage className="chatSize" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
                     {messageDto.fromId + " : " + messageDto.message}<button onClick={()=>handleDeleteMessage(messageDto)}>DEL </button></div>)} </div>
-                    
+                    <div className='message-box'>
+                  <h3 className='send-mess-title'>Send Message</h3>
+                  <div>
+                  <span className='right-padding'>To:</span><input className='to-padding' value={toId} onChange={e => setToId(e.target.value)} />
+                  </div>
+                  <textarea className='message-textarea' value={message} onChange={e => setMessage(e.target.value)} />
+                  <div>
+                    <button onClick={handleSendMessage}>Send Message</button>
+                    <div className='top-space'>{errorMessage}</div>
+                  </div>
                 </div>
-
+                </div>
+                    </div>
+                    <div className='curr-users-box'>
+                    <h3>Current Users:</h3>
+                    { users.map(user => <div className='to-padding'> {user.userName} </div>)}
+                </div>
                 
                 {/* This doesn't seem to work
                 {String userPicture = "https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560"}
