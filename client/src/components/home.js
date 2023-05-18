@@ -177,7 +177,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                 <div className='convo-box center-text'>
                   <h3 className='curr-convo-title center-text'>Your Conversations</h3>
                     {/* Attempt at making conversations more readable */}
-                    <div>{conversations.map(conversation => <>
+                    <div class="conversation-thread">{conversations.map(conversation => <>
                       <div onClick={() => setConversationId(conversation.conversationId)}>
           Conversation: <br></br> {conversation.conversationId}
           {/* Breaks to have a line between the label of conversation and who was in it */}
@@ -186,7 +186,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                 </div>
                 </div>
                
-                <div className ="convoWrapper">
+                <div className ="convo-wrapper">
                 <div className='view-messages-box'>
                   {/* Placeholder name "Active Conversation", plan to change to display the user you are messaging*/}
                   <div className='view-mssg-title'>Active Conversation</div>
@@ -203,7 +203,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                   </div>
                   <textarea className='message-textarea' value={message} onChange={e => setMessage(e.target.value)} />
                   <div>
-                    <button onClick={handleSendMessage}>Send Message</button>
+                    <button class="send-message-button" onClick={handleSendMessage}>Send Message</button>
                     <div className='top-space'>{errorMessage}</div>
                   </div>
                 </div>

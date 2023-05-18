@@ -53,31 +53,25 @@
   }
   
   .to-padding {
-    margin-bottom: 10px;
-    padding: 5px;
+    display: flex;
+    padding:5px;
+    width: 90%;
+    border-radius: 5px;
   }
   
   .message-textarea {
-    width: 100%;
-    height: 100px;
+    display: flex;
+    width: 88%;
+    height: 50px;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
+    border-width: 2px;
   }
   
-  .send-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
   
-  .send-button:hover {
-    background-color: #45a049;
-  }
+  
+  
   
   .top-space {
     margin-top: 10px;
@@ -95,11 +89,7 @@
     margin-top: 20px;
   }
   
-  .chatSize {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-  }
+  
   
   .center-text {
     text-align: center;
@@ -107,18 +97,9 @@
   
   /* Conversation Styling */
   
-  .conversation-container {
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-  }
   
-  .conversation-title {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
+  
+  
   
   .conversation-text {
     font-size: 12px;
@@ -130,4 +111,37 @@
     border-top: 1px solid #ccc;
   }
   
-  
+  .conversation-thread{
+    cursor: pointer;
+  }
+.send-message-button{
+    
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      
+      .submit-message-button:hover {
+        background-color: #45a049;
+      }
+      
+      .submit-message-button:active {
+        background-color: #3e8e41;
+      }
+.convo-wrapper{
+    display:flex;
+    border-radius: 20px;
+    border-color: black;
+   border:solid;
+
+
+
+
+}
