@@ -20,7 +20,6 @@ public class LoginHandler implements BaseHandler{
 
   @Override
   public HttpResponseBuilder handleRequest(ParsedRequest request) {
-
     var res = new HttpResponseBuilder();
     LoginDto userDto = GsonTool.gson.fromJson(request.getBody(), LoginDto.class);
     UserDao userDao = UserDao.getInstance();

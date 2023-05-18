@@ -2,10 +2,11 @@ package dao;
 
 import com.mongodb.client.MongoCollection;
 import dto.MessageDto;
+import org.bson.Document;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.bson.Document;
 
 // TODO fill this out
 public class MessageDao extends BaseDao<MessageDto> {
@@ -42,5 +43,11 @@ public class MessageDao extends BaseDao<MessageDto> {
         .map(MessageDto::fromDocument)
         .collect(Collectors.toList());
   }
+
+  public void delete(long timestamp) {
+    collection.deleteOne(new Document("timestamp", timestamp));
+  }
+
+
 
 }
