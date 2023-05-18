@@ -24,6 +24,8 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     };
     const result = await fetch('/getConversations', httpSettings);
     const apiRes = await result.json();
+    console.log("*******");
+    console.log(apiRes);
     if (apiRes.status) {
       // worked
       setConversations(apiRes.data); // java side should return list of all convos for this user
@@ -100,6 +102,30 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     }
     setIsLoading(false);
   };
+  async function handleDeleteMessage(messageDto) {
+    
+    
+    console.log(messageDto);
+    setIsLoading(true);
+    setErrorMessage('');
+    
+    const httpSettings = {
+      
+      method: 'GET',
+      headers: {
+        auth: cookies.get('auth'),
+      }
+    };
+    const result = await fetch('/deleteMessage?timestamp='+messageDto.timestamp, httpSettings);
+    const apiRes = await result.json();
+    console.log(apiRes);
+    setConversations([]);
+    // if (apiRes.status) {
+    // } else {
+    //   setErrorMessage(apiRes.message);
+    // }
+    // setIsLoading(false);
+  }
 
   async function getAllUsers() {
     setErrorMessage('')
@@ -204,10 +230,12 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                 <div className='convo-box center-text'>
                   <h3 className='curr-convo-title center-text'>Your Conversations</h3>
                     {/* Attempt at making conversations more readable */}
-                    <div>{conversations.map(conversation => <div onClick={() => setConversationId(conversation.conversationId)}>
+                    <div>{conversations.map(conversation => <>
+                      <div onClick={() => setConversationId(conversation.conversationId)}>
           Conversation: <br></br> {conversation.conversationId}
           {/* Breaks to have a line between the label of conversation and who was in it */}
-                    <br></br><br></br> </div>)} </div>
+                    <br></br><br></br> </div>
+                    </>)} </div>
                 </div>
                 </div>
                 <div className='curr-users-box'>
@@ -223,6 +251,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                    {messageThread.map(messageDto => <div>
                     <ProfileImage className="chatSize" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
                     {messageDto.fromId + " : " + messageDto.message}<button onClick={()=>handleDeleteMessage(messageDto)}> Delete </button></div>)} </div>
+                    
                 </div>
 
                 
