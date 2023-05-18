@@ -50,18 +50,19 @@ public class GetUserPictureHandler implements BaseHandler {
         //var filter = new Document("conversationId", request.getQueryParam("conversationId"));
         var filter = new Document("userName", request.getQueryParam("userName"));
         var foundUser = userDao.query(filter);
-        System.out.println("Founduser is: " + foundUser.toString());
+        System.out.println("Found user is: " + foundUser.toString());
         System.out.println("FoundUser username is: " + foundUser.get(0).getUserName());
         System.out.println("FoundUser image link is " + foundUser.get(0).getProfilePic());
         //foundUser.set(0, foundUser.get(0).getProfilePic())
         // I know how to get the link but not how to get it out of this file...
         //foundUser.get(0).getProfilePic();
+        String copeBypass = foundUser.get(0).getProfilePic();
 
 
         //var messages = messageDao.query(filter);
         //var res = new RestApiAppResponse<>(true, messages, null);
 
-        var res = new RestApiAppResponse<>(true, foundUser, null);
+        var res = new RestApiAppResponse<>(true, foundUser, copeBypass);
         //var res = new RestApiAppResponse<>(true, profilePicLink, null);
 
 

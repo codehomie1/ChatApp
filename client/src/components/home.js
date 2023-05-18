@@ -210,31 +210,33 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
   // ____________________________
 
    // new state variable for profile picture?
-   //const [picture, getPicture] = React.useState(''); // Default value set to string, which links to an image
    const [pictureLink, setPictureLink] = React.useState('');
 
   React.useEffect(() => {
-    // This is run any time that conversationId is changed (on click, for example)
-    getPicture(); // Get the conversation related to this new conversationId
+    // This is run any time that their picture is changed (hopefully)
+    getPicture(); // Get the picture for this user
   }, [pictureLink]);
 
-  async function getPicture() {  // For getUserPicture endpoint
+  async function getPicture(incomingUser) {  // For getUserPicture endpoint
     const httpSettings = {
       method: 'GET',
       headers: {
         auth: cookies.get('auth'), // utility to retrieve cookie from cookies
       }
     };
-    const result = await fetch('/GetUserPicture?userName=' + userName, httpSettings); // Get the user picture result and store it
+    const result = await fetch('/GetUserPicture?userName=' + incomingUser, httpSettings); // Get the user picture result and store it
     const apiRes = await result.json();
     console.log(apiRes);
     if (apiRes.status) {
-      // worked
-      //(apiRes.data).get(0).getProfilePic();
-      //setPictureLink(apiRes.data); // java side should return list that contains the user's profile link
+      // If it succeeded
+      console.log("The apiRes.data is: " + apiRes.data);
+      console.log("The apiRes message is: " + apiRes.message)
+      var copeBypass = apiRes.message;
+      setPictureLink(copeBypass); // This will read the link to their profile picture from the found user
     } else {
       setErrorMessage(apiRes.message);
     }
+    return copeBypass
   }
 // End re-write of the conversation example above
 // ____________________
@@ -247,7 +249,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
 
     // renders getConversations once
     // Also includes rendering getAllUsers
-    React.useEffect(() => { getConversations(); getAllUsers(); getPicture(); }, []);
+    React.useEffect(() => { getConversations(); getAllUsers(); }, []);
 
   // Start of HTML display
     return (
@@ -289,7 +291,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                   <div class="mssg-text">
                     {/* Change the image source later*/}
                    {messageThread.map(messageDto => <div>
-                    <ProfileImage className="chatSize" src={"default-profile.jpg"} alt="Profile Image"/>
+                    <ProfileImage className="chatSize" src={getPicture(messageDto.fromId)} alt="Profile Image"/>
                     {messageDto.fromId + " : " + messageDto.message}<button onClick={()=>handleDeleteMessage(messageDto)}> Delete </button></div>)} </div>
                     
                 </div>
@@ -319,7 +321,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                 getProfile</button> 
                  */}
                 <div> 
-                <ProfileImage className="largeRound" src="src\components\assets\default-profile.jpg" alt="Profile Image"/>
+                <ProfileImage className="largeRound" src={pictureLink} alt="Profile Image"/>
                 <button onClick={()=>getPicture()}>getPicture</button>
                 </div>
                 
