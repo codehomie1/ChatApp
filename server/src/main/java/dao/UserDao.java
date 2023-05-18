@@ -37,19 +37,18 @@ public class UserDao extends BaseDao<UserDto> {
 
 
   // Function to update user's profile image
-  public void changeProfilePic(String userName, String profilePic) {
+  public void changeProfilePic(Document foundDocument, String profilePic) {
+    // Take in a pre-searched document that is the user we want to change.
+    // Also take in a profilePic string which is the url or address to what we want the new one to be
 
-    // Search for the document in the database with this userName
-    //var foundUser = getInstance();
-
-    var foundUser = (Document) collection.find(new Document("userName", userName));
-
-    // This should set the profilePic of this to the input one
+    // This should set the profilePic of the user we want to change to the input one
     Bson newValue = new Document("profilePic", profilePic);
-    Bson setNewValueInDatabase = new Document("$set", newValue);
+    System.out.println("Change profile pic new value is " + newValue);
+    Bson setNewValueInDatabase = new Document("$set", newValue);  // Needs to have this format according to mongoDB documentation
+    System.out.println("Change profile pic setNewValueInDatabase is " + setNewValueInDatabase);
 
     // Update the input userName in the collection with the new input profilePic value
-    collection.updateOne(foundUser, setNewValueInDatabase);
+    collection.updateOne(foundDocument, setNewValueInDatabase);
     System.out.println("User profile picture updated to " + profilePic);
   }
 
