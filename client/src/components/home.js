@@ -178,53 +178,32 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     console.log(apiRes);
     if (apiRes.status) {
       // worked
-      setPictureLink(apiRes.data); // I don't know 
+      console.log("Theoretically the setUserPicture has been marked as successful") // debug
     } else {
-      setPictureLink(apiRes.message);
+      getLoggedInPictureLink(apiRes.message);
     }
-    //getUserProfile(); // Call get user profile to update any existing profile displays to the new one
+    //getLoggedInUserPicture(); // Call get user profile to update any existing profile displays to the new one
   }
 
-/*
-  async function getUserProfile() {
-    setErrorMessage('')
-    const httpSettings = {
-      method: 'GET',
-      headers: {
-        auth: cookies.get('auth'), // Check if user is logged in
-      }
-    };
-    const result = await fetch('/GetUserPicture', httpSettings);
-    const apiRes = await result.json();
-    console.log(apiRes);
-    if (apiRes.status) {
-      // worked
-      getPicture(apiRes.data); // Should return the link of their profile picture
-    } else {
-      getPicture(apiRes.message);
-    }
-  }
-*/
-
-// Reconstruction of getUserProfile using getConversation as a base?
+// Reconstruction of older (now deleted) getUserProfile using getConversation as a base
   // ____________________________
 
    // new state variable for profile picture?
-   const [pictureLink, setPictureLink] = React.useState('');
+   const [LoggedInPictureLink, getLoggedInPictureLink] = React.useState('');
 
   React.useEffect(() => {
     // This is run any time that their picture is changed (hopefully)
-    getPicture(); // Get the picture for this user
-  }, [pictureLink]);
+    getLoggedInUserPicture(); // Get the picture for this user
+  }, [LoggedInPictureLink]);
 
-  async function getPicture(incomingUser) {  // For getUserPicture endpoint
+  async function getLoggedInUserPicture() {  // For getUserPicture endpoint
     const httpSettings = {
       method: 'GET',
       headers: {
         auth: cookies.get('auth'), // utility to retrieve cookie from cookies
       }
     };
-    const result = await fetch('/GetUserPicture?userName=' + incomingUser, httpSettings); // Get the user picture result and store it
+    const result = await fetch('/GetUserPicture?userName=' + userName, httpSettings); // Get the user picture result and store it
     const apiRes = await result.json();
     console.log(apiRes);
     if (apiRes.status) {
@@ -232,7 +211,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
       console.log("The apiRes.data is: " + apiRes.data);
       console.log("The apiRes message is: " + apiRes.message)
       var copeBypass = apiRes.message;
-      setPictureLink(copeBypass); // This will read the link to their profile picture from the found user
+      getLoggedInPictureLink(copeBypass); // This will read the link to their profile picture from the found user
     } else {
       setErrorMessage(apiRes.message);
     }
@@ -241,6 +220,42 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
 // End re-write of the conversation example above
 // ____________________
 
+
+
+// Reconstruction of getUserProfile using getConversation as a base, v2, for other users
+  // ____________________________
+
+   // new state variable for profile picture?
+   const [otherUserPictureLink, setOtherUserPictureLink] = React.useState('');
+
+  React.useEffect(() => {
+    // This is run any time that their picture is changed (hopefully)
+    getOtherUserPicture(); // Get the picture for this user
+  }, [otherUserPictureLink]);
+
+  async function getOtherUserPicture(incomingUser) {  // For getUserPicture endpoint
+    const httpSettings = {
+      method: 'GET',
+      headers: {
+        auth: cookies.get('auth'), // utility to retrieve cookie from cookies
+      }
+    };
+    const result = await fetch('/GetUserPicture?userName=' + incomingUser, httpSettings); // Get the other user's picture result and store it
+    const apiRes = await result.json();
+    console.log(apiRes);
+    if (apiRes.status) {
+      // If it succeeded
+      console.log("The apiRes message is: " + apiRes.message)
+      var copeBypass = apiRes.message;
+      setOtherUserPictureLink(copeBypass); // This will read the link to their profile picture for the "Other User"
+    } else {
+      setErrorMessage(apiRes.message);
+    }
+    console.log("Return value will be: ||" + copeBypass + "||")
+    return copeBypass
+  }
+// End re-write of the conversation example above
+// ____________________
   
 
 
@@ -289,9 +304,11 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                   <div className='view-mssg-title'>Active Conversation</div>
                   <div></div>
                   <div class="mssg-text">
-                    {/* Change the image source later*/}
+                    {/* Change the image source later
+                    <ProfileImage className="chatSize" src="${getOtherUserPicture(messageDto.fromId)}"  alt="Profile Image"/>
+                    */}
                    {messageThread.map(messageDto => <div>
-                    <ProfileImage className="chatSize" src={getPicture(messageDto.fromId)} alt="Profile Image"/>
+                    <ProfileImage className="chatSize" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="this.onload=null; this.src=getOtherUserPicture(messageDto.fromId);"  alt="Profile Image"/>
                     {messageDto.fromId + " : " + messageDto.message}<button onClick={()=>handleDeleteMessage(messageDto)}> Delete </button></div>)} </div>
                     
                 </div>
@@ -304,16 +321,14 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
 
                 {/*
                 Storage of alternate formats for ProfileImage
+                <ProfileImage className="largeRound" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
                 <ProfileImage src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
                 <ProfileImage className="chatSize" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
                 */}
+              
+                {/* Not working yet...*/}
+                <button onClick={()=> setUserPicture("https://res.cloudinary.com/dk-find-out/image/upload/q_80,w_1920,f_auto/DCTM_Penguin_UK_DK_AL644648_p7nd0z.jpg")}> Force Set Picture to this link </button>
                 
-                <ProfileImage className="largeRound" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
-                
-                
-                {/* Not working yet...
-                <button onClick={()=> setUserPicture("https://i.ytimg.com/vi/ndSqUwgcyMI/maxresdefault.jpg")}> Cope </button>
-                */}
                 
 
                 {/* Debug button to test retrieval of a user profile value
@@ -321,8 +336,8 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                 getProfile</button> 
                  */}
                 <div> 
-                <ProfileImage className="largeRound" src={pictureLink} alt="Profile Image"/>
-                <button onClick={()=>getPicture()}>getPicture</button>
+                <ProfileImage className="largeRound" src={LoggedInPictureLink} alt="Profile Image"/>
+                <button onClick={()=>getLoggedInUserPicture()}>getPicture</button>
                 </div>
                 
                 

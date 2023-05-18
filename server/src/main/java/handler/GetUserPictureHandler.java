@@ -39,32 +39,26 @@ public class GetUserPictureHandler implements BaseHandler {
 
     @Override
     public HttpResponseBuilder handleRequest(ParsedRequest request) {
-        //MessageDao messageDao = MessageDao.getInstance();
         UserDao userDao = UserDao.getInstance();
 
         AuthFilter.AuthResult authResult = AuthFilter.doFilter(request);
         if(!authResult.isLoggedIn){
             return new HttpResponseBuilder().setStatus(StatusCodes.UNAUTHORIZED);
         }
-        System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-        //var filter = new Document("conversationId", request.getQueryParam("conversationId"));
-        var filter = new Document("userName", request.getQueryParam("userName"));
+        System.out.println("___________  LOCATOR FOR GET USER PICTURE DEBUG STATEMENTS  _____________");
+        var filter = new Document("userName", request.getQueryParam("userName"));  // Search the document for the username
         var foundUser = userDao.query(filter);
         System.out.println("Found user is: " + foundUser.toString());
         System.out.println("FoundUser username is: " + foundUser.get(0).getUserName());
-        System.out.println("FoundUser image link is " + foundUser.get(0).getProfilePic());
+        System.out.println("FoundUser image link is ||" + foundUser.get(0).getProfilePic() + " ||");
         //foundUser.set(0, foundUser.get(0).getProfilePic())
-        // I know how to get the link but not how to get it out of this file...
+        // I know how to get the link but not how to get it out of this file properly...
         //foundUser.get(0).getProfilePic();
+
+        // Work around strategy..., include the string to the image link in the output message
         String copeBypass = foundUser.get(0).getProfilePic();
 
-
-        //var messages = messageDao.query(filter);
-        //var res = new RestApiAppResponse<>(true, messages, null);
-
         var res = new RestApiAppResponse<>(true, foundUser, copeBypass);
-        //var res = new RestApiAppResponse<>(true, profilePicLink, null);
-
 
         return new HttpResponseBuilder().setStatus("200 OK").setBody(res);
     }
