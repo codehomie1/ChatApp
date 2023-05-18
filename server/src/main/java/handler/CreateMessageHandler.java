@@ -32,9 +32,10 @@ public class CreateMessageHandler implements BaseHandler {
       return new HttpResponseBuilder().setStatus(StatusCodes.UNAUTHORIZED);
     }
 
+    // Case when the user sends a message to a userName not in the database
     if (userDao.query(new Document("userName", messageDto.getToId())).size() == 0) {
       var res = new RestApiAppResponse<>(false, null,
-          "Sending message to unknown user");
+          "That user does not exist");
       return new HttpResponseBuilder().setStatus("200 OK").setBody(res);
     }
 
