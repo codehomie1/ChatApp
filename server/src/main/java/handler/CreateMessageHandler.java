@@ -19,15 +19,12 @@ public class CreateMessageHandler implements BaseHandler {
 
   @Override
   public HttpResponseBuilder handleRequest(ParsedRequest request) {
-
     System.out.println(request.getBody());
     MessageDto messageDto = GsonTool.gson.fromJson(request.getBody(), dto.MessageDto.class);
     MessageDao messageDao = MessageDao.getInstance();
     UserDao userDao = UserDao.getInstance();
 
-
     AuthResult authResult = AuthFilter.doFilter(request);
-
     if(!authResult.isLoggedIn){
       return new HttpResponseBuilder().setStatus(StatusCodes.UNAUTHORIZED);
     }

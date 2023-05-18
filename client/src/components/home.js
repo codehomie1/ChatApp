@@ -19,10 +19,6 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
    const [users, setUsers] = React.useState([]); // users array
 
    async function getConversations() {
-    if (!conversationId) {
-      setConversations([]); // If conversationId is not set, clear the message thread
-      return;
-    }
     const httpSettings = {
       method: 'GET',
       headers: {

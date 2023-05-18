@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e80ea068-9159-476a-a885-c1cc7e88b6ea" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../server copy/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/dao/AuthDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/dao/BaseDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/dao/ConversationDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/dao/MessageDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/dao/MongoConnection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/dao/UserDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/dto/AuthDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/dto/BaseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/dto/ConversationDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/dto/MessageDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/dto/UserDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/handler/AuthFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/handler/BaseHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/handler/CreateMessageHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/handler/CreateUserHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/handler/DeleteMessageHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/handler/FallbackHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/handler/GetConversationHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/handler/GetConversationsHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/handler/GsonTool.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/handler/HandlerFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/handler/LoginHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/handler/StatusCodes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/request/CustomParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/request/ParsedRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/response/CustomHttpResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/response/HttpResponseBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/response/RestApiAppResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/src/main/java/server/Server.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/dao/AuthDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/dao/BaseDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/dao/ConversationDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/dao/MessageDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/dao/MongoConnection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/dao/UserDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/dto/AuthDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/dto/BaseDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/dto/ConversationDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/dto/MessageDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/dto/UserDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/handler/AuthFilter$AuthResult.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/handler/AuthFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/handler/BaseHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/handler/CreateMessageHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/handler/CreateUserHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/handler/DeleteMessageHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/handler/FallbackHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/handler/GetAllUsersHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/handler/GetConversationHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/handler/GetConversationsHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/handler/GsonTool.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/handler/HandlerFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/handler/LoginDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/handler/LoginHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/handler/StatusCodes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/request/CustomParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/request/ParsedRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/response/CustomHttpResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/response/HttpResponseBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/response/RestApiAppResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server copy/target/classes/server/Server.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/dao/MessageDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/dao/MessageDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/dto/MessageDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/dto/MessageDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/handler/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/handler/AuthFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/handler/CreateMessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/handler/CreateMessageHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/handler/CreateUserHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/handler/CreateUserHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/handler/GetAllUsersHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/handler/GetConversationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/handler/GetConversationHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/handler/HandlerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/handler/HandlerFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/handler/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/handler/LoginHandler.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="2PzDjY66bSmpAVxYfXcRVAnkgmg" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/Egg Chef/Documents/GitHub/final-project-413warriors/server"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e80ea068-9159-476a-a885-c1cc7e88b6ea" name="Changes" comment="" />
+      <created>1684451153626</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1684451153626</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
