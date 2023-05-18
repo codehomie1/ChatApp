@@ -167,22 +167,22 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
   async function setUserPicture(webURL){
     setErrorMessage("")
     const httpSettings = {
-      method: 'GET',
+      method: 'POST',
       headers: {
-        auth: cookies.get('auth'), // utility to retrive cookie from cookies
+        auth: cookies.get('auth'), // utility to retrieve cookie from cookies
       }
     };
 
-    const result = await fetch('/SetUserPicture?userName' + userName + webURL, httpSettings);
+    const result = await fetch('/SetUserPicture?webURL=' +webURL, httpSettings);
     const apiRes = await result.json();
     console.log(apiRes);
     if (apiRes.status) {
       // worked
       console.log("Theoretically the setUserPicture has been marked as successful") // debug
+      getLoggedInUserPicture(); // Call get user profile to update any existing profile displays to the new one
     } else {
       getLoggedInPictureLink(apiRes.message);
     }
-    //getLoggedInUserPicture(); // Call get user profile to update any existing profile displays to the new one
   }
 
 // Reconstruction of older (now deleted) getUserProfile using getConversation as a base
