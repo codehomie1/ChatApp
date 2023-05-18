@@ -167,6 +167,8 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
   }
 
 
+  // This function will take an input URL and sent it to the SetUserPicture endpoint, 
+  // which will change their picture in the database to whatever is at the input url
   async function setUserPicture(webURL) {
     setErrorMessage("")
     const httpSettings = {
@@ -191,11 +193,11 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
   // Reconstruction of older (now deleted) getUserProfile using getConversation as a base
   // ____________________________
 
-  // new state variable for profile picture?
+  // new state variable for the logged in user's profile picture
   const [LoggedInPictureLink, getLoggedInPictureLink] = React.useState('');
 
   React.useEffect(() => {
-    // This is run any time that their picture is changed (hopefully)
+    // This is run any time that their picture is changed
     getLoggedInUserPicture(); // Get the picture for this user
   }, [LoggedInPictureLink]);
 
@@ -262,9 +264,6 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
 
 
 
-
-
-
   // renders getConversations once
   // Also includes rendering getAllUsers
   React.useEffect(() => { getConversations(); getAllUsers(); }, []);
@@ -311,7 +310,9 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
                     <ProfileImage className="chatSize" src="${getOtherUserPicture(messageDto.fromId)}"  alt="Profile Image"/>
                     */}
             {messageThread.map(messageDto => <div>
-              <ProfileImage className="chatSize" src="{CHANGE THIS TO THE OTHER ONE LATER}" onload="this.onload=null; this.src=getOtherUserPicture(messageDto.fromId);" alt="Profile Image" />
+                                   {/* {getOtherUserPicture(messageDto.fromId)} */}
+              <ProfileImage className="chatSize" src={otherUserPictureLink} alt="Profile Image" />
+              <button onClick={() => getOtherUserPicture(messageDto.fromId)}>Refresh</button>
               {messageDto.fromId + " : " + messageDto.message}<button onClick={() => handleDeleteMessage(messageDto)}> Delete </button></div>)} </div>
 
         </div>
