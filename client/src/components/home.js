@@ -227,23 +227,19 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
 
 
 
-  // Reconstruction of getUserProfile using getConversation as a base, v2, for other users
+  // Reconstruction of getUserProfile using getConversation as a base, v2, for any username input into it
+  // It works properly but is currently unused as the feature in the message box was shifted to be in the messageDTO directly
   // ____________________________
 
   // new state variable for profile picture?
-  const [otherUserPictureLink, setOtherUserPictureLink] = React.useState('');
-
-  /*
+  const [inputUserPictureLink, setInputUserPictureLink] = React.useState('');
 
   React.useEffect(() => {
     // This is run any time that their picture is changed (hopefully)
-    getOtherUserPicture(); // Get the picture for this user
-  }, [otherUserPictureLink]);
-  */
-  
-  
+    getInputUserPicture(); // Get the picture for this user
+  }, [inputUserPictureLink]);
 
-  async function getOtherUserPicture(incomingUser) {  // For getUserPicture endpoint
+  async function getInputUserPicture(incomingUser) {  // For getUserPicture endpoint
     const httpSettings = {
       method: 'GET',
       headers: {
@@ -257,7 +253,7 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
       // If it succeeded
       console.log("The apiRes message is: " + apiRes.message)
       var copeBypass = apiRes.message;
-      setOtherUserPictureLink(copeBypass); // This will read the link to their profile picture for the "Other User"
+      setInputUserPictureLink(copeBypass); // This will read the link to their profile picture for the "Other User"
     } else {
       setErrorMessage(apiRes.message);
     }
@@ -307,21 +303,19 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
           {users.map(user => <div className='to-padding'> {user.userName} </div>)}
         </div>
         <div className='view-messages-box'>
-          {/* Placeholder name "Active Conversation", plan to change to display the user you are messaging*/}
+          {/* Placeholder name "Active Conversation", ideally plan to change to display the user you are messaging*/}
           <div className='view-mssg-title'>Active Conversation</div>
           <div></div>
           <div class="mssg-text">
-            {/* Change the image source later
-                    <ProfileImage className="chatSize" src="${getOtherUserPicture(messageDto.fromId)}"  alt="Profile Image"/>
-                    */}
             {messageThread.map(messageDto => <div>
                                    {/* {getOtherUserPicture(messageDto.fromId)} 
                                    <ProfileImage className="chatSize" src={otherUserPictureLink} alt="Profile Image"   />
 
-                                   <ProfileImage className="chatSize" src={otherUserPictureLink} alt="Profile Image"   />
+                                   Manual refresh button for debugging
+                                   <button onClick={() => getOtherUserPicture(messageDto.userPicture)}>Refresh</button>
                                    */}
+
               <ProfileImage className="chatSize" src={messageDto.userPicture} alt="Profile Image"   />
-              <button onClick={() => getOtherUserPicture(messageDto.userPicture)}>Refresh</button>
               {messageDto.fromId + " : " + messageDto.message}<button onClick={() => handleDeleteMessage(messageDto)}> Delete </button></div>)} </div>
 
         </div>
