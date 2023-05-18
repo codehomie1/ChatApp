@@ -4,7 +4,6 @@ import React from 'react';
 import ProfileImage from "./ProfileImage";
 
 
-
 function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookies}) {
 
   // new state variables for send message box
@@ -14,10 +13,6 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
   // new state variable for list of convos
    const [conversations, setConversations] = React.useState([]); // default empty array
    const [users, setUsers] = React.useState([]); // users array
-
-  // new state variable for profile picture?
-  const [picture, getPicture] = React.useState('');
-  const [pictureLink, setPictureLink] = React.useState('');
 
    async function getConversations() {
     const httpSettings = {
@@ -187,10 +182,10 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     } else {
       setPictureLink(apiRes.message);
     }
-    getUserProfile(); // Call get user profile to update any existing profile displays to the new one
+    //getUserProfile(); // Call get user profile to update any existing profile displays to the new one
   }
 
-
+/*
   async function getUserProfile() {
     setErrorMessage('')
     const httpSettings = {
@@ -209,6 +204,42 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
       getPicture(apiRes.message);
     }
   }
+*/
+
+// Reconstruction of getUserProfile using getConversation as a base?
+  // ____________________________
+
+   // new state variable for profile picture?
+   //const [picture, getPicture] = React.useState(''); // Default value set to string, which links to an image
+   const [pictureLink, setPictureLink] = React.useState('');
+
+  React.useEffect(() => {
+    // This is run any time that conversationId is changed (on click, for example)
+    getPicture(); // Get the conversation related to this new conversationId
+  }, [pictureLink]);
+
+  async function getPicture() {  // For getUserPicture endpoint
+    const httpSettings = {
+      method: 'GET',
+      headers: {
+        auth: cookies.get('auth'), // utility to retrieve cookie from cookies
+      }
+    };
+    const result = await fetch('/GetUserPicture?userName=' + userName, httpSettings); // Get the user picture result and store it
+    const apiRes = await result.json();
+    console.log(apiRes);
+    if (apiRes.status) {
+      // worked
+      //(apiRes.data).get(0).getProfilePic();
+      //setPictureLink(apiRes.data); // java side should return list that contains the user's profile link
+    } else {
+      setErrorMessage(apiRes.message);
+    }
+  }
+// End re-write of the conversation example above
+// ____________________
+
+  
 
 
 
@@ -216,7 +247,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
 
     // renders getConversations once
     // Also includes rendering getAllUsers
-    React.useEffect(() => { getConversations(); getAllUsers(); }, []);
+    React.useEffect(() => { getConversations(); getAllUsers(); getPicture(); }, []);
 
   // Start of HTML display
     return (
@@ -258,7 +289,7 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                   <div class="mssg-text">
                     {/* Change the image source later*/}
                    {messageThread.map(messageDto => <div>
-                    <ProfileImage className="chatSize" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
+                    <ProfileImage className="chatSize" src={"default-profile.jpg"} alt="Profile Image"/>
                     {messageDto.fromId + " : " + messageDto.message}<button onClick={()=>handleDeleteMessage(messageDto)}> Delete </button></div>)} </div>
                     
                 </div>
@@ -278,12 +309,18 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                 <ProfileImage className="largeRound" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
                 
                 
-                {/* Not working yet... */}
+                {/* Not working yet...
                 <button onClick={()=> setUserPicture("https://i.ytimg.com/vi/ndSqUwgcyMI/maxresdefault.jpg")}> Cope </button>
+                */}
+                
 
-                {/* Debug button to test retrieval of a user profile value */}
-                <div> <button onClick={()=> getUserProfile()}> 
+                {/* Debug button to test retrieval of a user profile value
+                <button onClick={()=> getUserProfile()}> 
                 getProfile</button> 
+                 */}
+                <div> 
+                <ProfileImage className="largeRound" src="src\components\assets\default-profile.jpg" alt="Profile Image"/>
+                <button onClick={()=>getPicture()}>getPicture</button>
                 </div>
                 
                 
