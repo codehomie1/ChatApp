@@ -73,6 +73,7 @@
   
   
   
+  
   .top-space {
     margin-top: 10px;
   }
@@ -137,9 +138,31 @@
       }
 .convo-wrapper{
     display:flex;
+    
     border-radius: 20px;
     border-color: black;
    border:solid;
+   width: fit-content;
+
+}
+.current-message{
+    display: flex;
+    width: 100%;
+    background-color: lightblue;
+    padding:3px;
+    border-radius:5px;
+    margin:3px;
+    
+}
+ 
+.delete-button{
+position:relative;
+margin-left:250px;
+width: 70%;
+cursor:pointer;
+display: inline-block;
+border: none;
+background-color: lightblue;
 
 
 

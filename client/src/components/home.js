@@ -4,6 +4,7 @@ import React from 'react';
 
 
 
+
 import ProfileImage from "./ProfileImage";
 
 
@@ -193,9 +194,9 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                   <div></div>
                   <div class="mssg-text">
                     {/* Change the image source later*/}
-                   {messageThread.map(messageDto => <div>
+                   {messageThread.map(messageDto => <div class="current-message">
                     <ProfileImage className="chatSize" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
-                    {messageDto.fromId + " : " + messageDto.message}<button onClick={()=>handleDeleteMessage(messageDto)}>DEL </button></div>)} </div>
+                    {messageDto.fromId + " : " + messageDto.message}<button class="delete-button"onClick={()=>handleDeleteMessage(messageDto)}>unsend </button></div>)} </div>
                     <div className='message-box'>
                   <h3 className='send-mess-title'>Send Message</h3>
                   <div>
