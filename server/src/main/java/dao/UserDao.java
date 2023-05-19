@@ -53,6 +53,27 @@ public class UserDao extends BaseDao<UserDto> {
   }
 
 
+  // Functions from Jaime's branch
+  public void update(Document filter, Document update) {
+    try {
+      collection.updateOne(filter, update);
+    } catch (Exception e) {
+      // Handle any exceptions that occur during the update process
+      e.printStackTrace();
+      // You can throw a custom exception or handle the error condition as per your application's requirements
+    }
+  }
+
+  public UserDto getByUsername(String username){
+    Document filter = new Document("userName", username);
+    List<UserDto> users = query(filter);
+    if(!users.isEmpty()){
+      return users.get(0);
+    }
+    return null;
+  }
+
+
   public List<UserDto> query(Document filter){
     return collection.find(filter)
         .into(new ArrayList<>())

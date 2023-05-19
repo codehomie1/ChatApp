@@ -43,6 +43,11 @@ public class ParsedRequest {
     return method;
   }
 
+  // Method from Jaime's branch
+  public String getBodyParameter(String paramName){
+    return body;
+  }
+
   public String getBody(){
     return body;
   }

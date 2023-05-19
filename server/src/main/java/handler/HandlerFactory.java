@@ -1,6 +1,7 @@
 package handler;
 
 import request.ParsedRequest;
+import dao.UserDao; // imported  from Jaime's
 
 public class HandlerFactory {
   // routes based on the path. Add your custom handlers here
@@ -24,6 +25,9 @@ public class HandlerFactory {
         return new GetUserPictureHandler();
       case "/deleteMessage":
         return new DeleteMessageHandler();
+      case "/addFriends":
+        UserDao userDao = UserDao.getInstance();
+        return new AddFriendHandler(userDao);
 
       default:
         return new FallbackHandler();
