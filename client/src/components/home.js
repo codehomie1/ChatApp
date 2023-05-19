@@ -1,10 +1,10 @@
 import './home.css';
 import React from 'react';
 
-
 import ProfileImage from "./ProfileImage";
 
-function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookies}) {
+
+function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cookies }) {
 
   // new state variables for send message box
   const [toId, setToId] = React.useState('');
@@ -12,42 +12,6 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
 
   // New state variable for the message box where you can set a new user profile picture.
   const [changePictureBoxMessage, setChangePictureBoxMessage] = React.useState('');
-
-   //new state variable for adding users
-   const[selectedFriends, setSelectedFriends] = React.useState([]);
-     
-
-
-   async function addFriend(userName, friendName) {
-     const httpSettings = {
-       method: 'POST',
-       headers: {
-       //  'Content-Type': 'application/json',
-         auth: cookies.get('auth'),
-       },
-       body: JSON.stringify({
-         userName,
-         friendName,
-       }),
-     };
-   
-     try {
-       const result = await fetch('/addFriends', httpSettings);
-       if (result.ok) {
-         console.log('Friend added successfully.');
-       } else {
-         console.log('Failed to add friend.');
-       }
-     } catch (error) {
-       console.log('An error occurred while adding friend.');
-     }
-   }
-
-    //Function to handle adding user as friend
-    const handleAddFriend = (user) =>{
-     setSelectedFriends((prevSelectedFriends)=> [...prevSelectedFriends, user.userName]);
-     addFriend(user, userName);
-   }
 
   // new state variable for list of convos
   const [conversations, setConversations] = React.useState([]); // default empty array
@@ -82,8 +46,6 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     // This is run any time that conversationId is changed (on click, for example)
     getConversation(); // Get the conversation related to this new conversationId
   }, [conversationId]);
-
-
 
   async function getConversation() {  // For getConversation endpoint
     const httpSettings = {
@@ -297,71 +259,73 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
   // Also includes rendering getAllUsers
   React.useEffect(() => { getConversations(); getAllUsers(); }, []);
 
-  
-
   // Start of HTML display
   return (
 
-            <div className="homepage-container">
-              <h1 className='home-title center-text'>Welcome {userName}</h1>
-              <div className='flex-container'>
-                <div className='message-box'>
-                  <h3 className='send-mess-title'>Send Message</h3>
-                  <div>
-                  <span className='right-padding'>To:</span><input className='to-padding' value={toId} onChange={e => setToId(e.target.value)} />
-                  </div>
-                  <textarea className='message-textarea' value={message} onChange={e => setMessage(e.target.value)} />
-                  <div>
-                    <button onClick={handleSendMessage}>Send Message</button>
-                    <div className='top-space'>{errorMessage}</div>
-                  </div>
-                </div>
-                <div>
-                <div className='convo-box center-text'>
-                  <h3 className='curr-convo-title center-text'>Your Conversations</h3>
-                    {/* Attempt at making conversations more readable */}
-                    <div>{conversations.map(conversation => <div onClick={() => setConversationId(conversation.conversationId)}>
-          Conversation: <br></br> {conversation.conversationId}
-          {/* Breaks to have a line between the label of conversation and who was in it */}
-                    <br></br><br></br> </div>)} </div>
-                </div>
-                </div>
-                <div className='curr-users-box'>
-                    <h3>Current Users:</h3>
-                    { users.map(user => <div className='to-padding'> {user.userName} 
-                    
-                    <button class="button1" onClick={() => handleAddFriend(user)}>Add Friend</button>
-                    </div>)}
-                    <div class="box">
-                  Friend List: {selectedFriends.join(', ')}
-                </div>
+    <div className="homepage-container">
+      <h1 className='home-title center-text'>Welcome {userName}</h1>
+      <div className='flex-container'>
 
 
-                </div>
-                <div className='view-messages-box'>
-                  {/* Placeholder name "Active Conversation", plan to change to display the user you are messaging*/}
-                  <div className='view-mssg-title'>Active Conversation</div>
-                  <div></div>
-                  <div class="mssg-text">
-                    {/* Change the image source later*/}
-                   {messageThread.map(messageDto => <div>
-                    <ProfileImage className="chatSize" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
-                    {messageDto.fromId + " : " + messageDto.message}</div>)} </div>
-                </div>
+        {/* Renders the currently logged in user's profile picture in a big circle (largeRound) */}
+        <div> <ProfileImage className="largeRound" src={LoggedInPictureLink} alt="Profile Image didn't render because you're on dialup internet" /> </div>
+          
+        {/* Submit image by either copy and pasting it in here or dragging and dropping it from a webpage*/}
+        <div className='message-box'>
+          <h3 className='send-mess-title'>Change your Picture!</h3>
+          {/* Currently this changes both message boxes at once so the value and onchange needs to change too. */}
+          <textarea className='message-textarea' value={changePictureBoxMessage} onChange={e => setChangePictureBoxMessage(e.target.value)} />
+          <div>
+            <button onClick={() => setUserPicture(changePictureBoxMessage)}>Change Profile Picture</button>
+            <div className='top-space'>{errorMessage}</div>
+          </div>
+        </div>
 
-                
-                {/* This doesn't seem to work
-                {String userPicture = "https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560"}
-                <ProfileImage src=userPicture alt="Profile Image didn't render because you're on dialup internet"/>
-                */}
 
-                {/*
-                Storage of alternate formats for ProfileImage
-                <ProfileImage src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
-                <ProfileImage className="chatSize" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
-                */}
-                
-                <ProfileImage className="largeRound" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81piYqR_h-RQPH1hIBdHnmc0bx-KE8cZ4cawYzl4zQNS0O0a0KyBj6LBNU9UIFsubHhYLmUz-Yt3RGGWB75L3fiX8TKi-w=s2560" alt="Profile Image"/>
+        <div>
+          <div className='convo-box center-text'>
+            <h3 className='curr-convo-title center-text'>Your Conversations</h3>
+            {/* Attempt at making conversations more readable */}
+            <div class="conversation-thread">{conversations.map(conversation => <>
+              <div onClick={() => setConversationId(conversation.conversationId)}>
+                Conversation: <br></br> {conversation.conversationId}
+                {/* Breaks to have a line between the label of conversation and who was in it */}
+                <br></br><br></br> </div>
+            </>)} </div>
+          </div>
+        </div>
+
+        <div className="convo-wrapper">
+
+          <div className='view-messages-box'>
+            <div className='view-mssg-title'>Active Conversation</div>
+            <div></div>
+            <div class="mssg-text">
+              {/* Change the image source later*/}
+              {messageThread.map(messageDto => <div class="current-message">
+              <ProfileImage className="chatSize" src={messageDto.userPicture} alt="Profile Image"   />
+                {messageDto.fromId + " : " + messageDto.message}<br></br><button class="delete-button" onClick={() => handleDeleteMessage(messageDto)}> Unsend </button></div>)} </div>
+            
+
+            <div className='message-box'>
+              <h3 className='send-mess-title'>Send Message</h3>
+              <div>
+                <span className='right-padding'>To:</span><input className='to-padding' value={toId} onChange={e => setToId(e.target.value)} />
+              </div>
+              <textarea className='message-textarea' value={message} onChange={e => setMessage(e.target.value)} />
+              <div>
+                <button class="send-message-button" onClick={handleSendMessage}>Send Message</button>
+                <div className='top-space'>{errorMessage}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        <div className='curr-users-box'>
+          <h3>Current Users:</h3>
+          {users.map(user => <div className='to-padding'> {user.userName} </div>)}
+        </div>
 
       </div>
     </div>

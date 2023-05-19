@@ -1,7 +1,5 @@
 package server;
 
-import dao.UserDao;
-import handler.AddFriendHandler;
 import handler.BaseHandler;
 import handler.HandlerFactory;
 import handler.StatusCodes;
@@ -67,8 +65,6 @@ public class Server {
   // Response is a raw http response string
   public static String processRequest(String requestString) {
     try{
-     // UserDao userDao = UserDao.getInstance();
-     // AddFriendHandler addFriendHandler = new AddFriendHandler(userDao);
       ParsedRequest request = CustomParser.parse(requestString);
       BaseHandler handler = HandlerFactory.getHandler(request);
       var builder = handler.handleRequest(request);
