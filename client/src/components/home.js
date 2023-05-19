@@ -60,8 +60,10 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
     if (apiRes.status) {
       // worked
       setMessageThread(apiRes.data); // java side should return list of all messages in this thread (from conversation ID)
-      // setTimeout(getConversation, 2500); 
-      // Currently disabled as it seems to automatically cycle through all previously selected conversations
+      // Example from the class demo
+      // Works great on a single conversation but seems to break if the user ever switches
+      //setTimeout(getConversation, 2500); 
+      // Currently disabled as it automatically cycles through all previously selected conversations
       // Should refresh conversations every 2.5 seconds so any incoming messages will display
       // Without this, you won't see these new messages unless you refresh the conversation manually (or by sending a message yourself, which re-fetches it)
 
@@ -231,7 +233,7 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
   // It works properly but is currently unused as the feature in the message box was shifted to be in the messageDTO directly
   // ____________________________
 
-  // new state variable for profile picture?
+  // new state variable for profile picture
   const [inputUserPictureLink, setInputUserPictureLink] = React.useState('');
 
   React.useEffect(() => {
@@ -257,8 +259,9 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
     } else {
       setErrorMessage(apiRes.message);
     }
-    console.log("Return value will be: ||" + copeBypass + "||")
-    return copeBypass
+    console.log("Return value will be: " + copeBypass)
+    console.log("return value is actually: " + <img src={copeBypass}/>)
+    return <img src={copeBypass}/>;
   }
   // End re-write of the conversation example above
   // ____________________
@@ -335,7 +338,7 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
         {/* Renders the currently logged in user's profile picture in a big circle (largeRound) */}
         <div> <ProfileImage className="largeRound" src={LoggedInPictureLink} alt="Profile Image didn't render because you're on dialup internet" /> </div>
         
-        {/* WIP Submit image link.*/}
+        {/* Submit image by either copy and pasting it in here or dragging and dropping it from a webpage*/}
         <div className='message-box'>
           <h3 className='send-mess-title'>Change your Picture!</h3>
           {/* Currently this changes both message boxes at once so the value and onchange needs to change too. */}
@@ -345,16 +348,24 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
             <div className='top-space'>{errorMessage}</div>
           </div>
         </div>
+        
+
+                {/* Renders the currently logged in user's profile picture in a big circle (largeRound) 
+                
+                Experiments to find out how to get a src to use a return value as an input
+
+                      <ProfileImage className="" src={getInputUserPicture(userName)} alt="Profile Image"   />
+
+                */}
 
 
+                
+        
+      </div> {/* Closing div of Flex container */}
 
-
-
-      </div>
-    </div>
-
+      {/* Closing div of Homepage container */}
+    </div> 
   );
-
 }
 
 
