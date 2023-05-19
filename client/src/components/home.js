@@ -274,26 +274,20 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
         <div className='message-box'>
           <h3 className='send-mess-title'>Change your Picture!</h3>
           {/* Currently this changes both message boxes at once so the value and onchange needs to change too. */}
-          <textarea className='message-textarea' value={changePictureBoxMessage} onChange={e => setChangePictureBoxMessage(e.target.value)} />
+          <textarea className='message-textarea' placeholder='Please add the url of the picture to update your Profile Picture'value={changePictureBoxMessage} onChange={e => setChangePictureBoxMessage(e.target.value)} />
           <div>
             <button onClick={() => setUserPicture(changePictureBoxMessage)}>Change Profile Picture</button>
             <div className='top-space'>{errorMessage}</div>
+
+            <div className='curr-users-box'>
+          <h3>Current Users:</h3>
+          {users.map(user => <div className='to-padding'> {user.userName} </div>)}
+        </div>
           </div>
         </div>
 
 
-        <div>
-          <div className='convo-box center-text'>
-            <h3 className='curr-convo-title center-text'>Your Conversations</h3>
-            {/* Attempt at making conversations more readable */}
-            <div class="conversation-thread">{conversations.map(conversation => <>
-              <div onClick={() => setConversationId(conversation.conversationId)}>
-                Conversation: <br></br> {conversation.conversationId}
-                {/* Breaks to have a line between the label of conversation and who was in it */}
-                <br></br><br></br> </div>
-            </>)} </div>
-          </div>
-        </div>
+        
 
         <div className="convo-wrapper">
 
@@ -320,12 +314,20 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
             </div>
           </div>
         </div>
-        
-        
-        <div className='curr-users-box'>
-          <h3>Current Users:</h3>
-          {users.map(user => <div className='to-padding'> {user.userName} </div>)}
+        <div>
+          <div className='convo-box center-text'>
+            <h3 className='curr-convo-title center-text'>Your Conversations</h3>
+            {/* Attempt at making conversations more readable */}
+            <div class="conversation-thread">{conversations.map(conversation => <>
+              <div onClick={() => setConversationId(conversation.conversationId)}>
+                Conversation: <br></br> {conversation.conversationId}
+                {/* Breaks to have a line between the label of conversation and who was in it */}
+                <br></br><br></br> </div>
+            </>)} </div>
+          </div>
         </div>
+        
+        
 
       </div>
     </div>
