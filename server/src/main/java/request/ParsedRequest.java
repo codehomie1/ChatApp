@@ -43,6 +43,10 @@ public class ParsedRequest {
     return method;
   }
 
+
+  public String getBodyParameter(String paramName){
+    return body;
+  }
   public String getBody(){
     return body;
   }

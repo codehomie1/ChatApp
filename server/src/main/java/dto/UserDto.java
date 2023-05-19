@@ -7,6 +7,16 @@ public class UserDto extends BaseDto{
   private String userName;
   private String password;
 
+  private String friendName;
+
+  public String getFriendName(){
+    return friendName;
+  }
+
+  public void setFriendName(String friendName){
+    this.friendName = friendName;
+  }
+
   public UserDto() {
     super();
   }
@@ -43,7 +53,8 @@ public class UserDto extends BaseDto{
     return new Document()
         .append("userName", userName)
         .append("password", password)
-        .append("profilePic", profilePic);
+        .append("profilePic", profilePic)
+        .append("friendName", friendName);
   }
 
   public static UserDto fromDocument(Document match) {
@@ -51,6 +62,7 @@ public class UserDto extends BaseDto{
     userDto.setUserName(match.getString("userName"));
     userDto.setPassword(match.getString("password"));
     userDto.setProfilePic(match.getString("profilePic"));
+    userDto.setFriendName(match.getString("friends"));
     return  userDto;
   }
 
