@@ -1,12 +1,50 @@
 import './home.css';
 import React from 'react';
 
+
 import ProfileImage from "./ProfileImage";
+
 
 
 
 function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookies}) {
 
+  //new state variable for adding users
+  const[selectedFriends, setSelectedFriends] = React.useState([]);
+     
+
+
+      async function addFriend(userName, friendName) {
+        const httpSettings = {
+          method: 'POST',
+          headers: {
+          //  'Content-Type': 'application/json',
+            auth: cookies.get('auth'),
+          },
+          body: JSON.stringify({
+            userName,
+            friendName,
+          }),
+        };
+      
+        try {
+          const result = await fetch('/addFriends', httpSettings);
+          if (result.ok) {
+            console.log('Friend added successfully.');
+          } else {
+            console.log('Failed to add friend.');
+          }
+        } catch (error) {
+          console.log('An error occurred while adding friend.');
+        }
+      }
+
+       //Function to handle adding user as friend
+       const handleAddFriend = (user) =>{
+        setSelectedFriends((prevSelectedFriends)=> [...prevSelectedFriends, user.userName]);
+        addFriend(user, userName);
+      }
+      
   // new state variables for send message box
    const [toId, setToId] = React.useState('');
    const [message, setMessage] = React.useState('');
@@ -42,6 +80,8 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     // This is run any time that conversationId is changed (on click, for example)
     getConversation(); // Get the conversation related to this new conversationId
   }, [conversationId]);
+
+
 
   async function getConversation() {  // For getConversation endpoint
     const httpSettings = {
@@ -124,6 +164,8 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
     // Also includes rendering getAllUsers
     React.useEffect(() => { getConversations(); getAllUsers(); }, []);
 
+  
+
   // Start of HTML display
     return (
 
@@ -153,7 +195,13 @@ function HomePage({userName, setIsLoading, setErrorMessage, errorMessage, cookie
                 </div>
                 <div className='curr-users-box'>
                     <h3>Current Users:</h3>
-                    { users.map(user => <div className='to-padding'> {user.userName} </div>)}
+                    {users.map((user) => (
+  <div className='to-padding'>
+                  {user.userName}
+                <button class="button1" onClick={() => handleAddFriend(user)}>Add Friend</button>
+  </div>))}    </div>
+                <div class="box">
+                  Friend List: {selectedFriends.join(', ')}
                 </div>
                 <div className='view-messages-box'>
                   {/* Placeholder name "Active Conversation", plan to change to display the user you are messaging*/}

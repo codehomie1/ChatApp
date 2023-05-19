@@ -1,5 +1,6 @@
 package handler;
 
+import dao.UserDao;
 import request.ParsedRequest;
 
 public class HandlerFactory {
@@ -18,6 +19,9 @@ public class HandlerFactory {
         return new CreateMessageHandler();
       case "/getAllUsers":
         return new GetAllUsersHandler();
+      case "/addFriends":
+        UserDao userDao = UserDao.getInstance();
+        return new AddFriendHandler(userDao);
       default:
         return new FallbackHandler();
     }
