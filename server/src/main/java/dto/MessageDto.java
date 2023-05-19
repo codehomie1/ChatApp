@@ -1,7 +1,8 @@
 package dto;
 
-import java.time.Instant;
 import org.bson.Document;
+
+import java.time.Instant;
 
 public class MessageDto extends BaseDto{
 
@@ -21,6 +22,9 @@ public class MessageDto extends BaseDto{
     super(uniqueId);
     timestamp = Instant.now().toEpochMilli();
   }
+
+
+
 
   public String getFromId() {
     return fromId;
@@ -64,6 +68,7 @@ public class MessageDto extends BaseDto{
 
   public Document toDocument(){
     return new Document()
+
         .append("fromId", fromId)
         .append("toId", toId)
         .append("message", message)

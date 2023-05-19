@@ -1,93 +1,170 @@
-
-
-.center-text {
-    text-align: center;
-}
-
-.top-space {
-    margin-top: 20px;
-}
-
-.right-padding {
-    padding-right: 5px;
-}
-
-.to-padding {
-    padding: 2px;
-}
-
-.curr-convo-title {
-    font-size: medium;
-    margin-top: -3px;
-    margin-bottom: 25px;
-}
-
-.send-mess-title {
-    font-weight: bold;
-    font-size: medium;
-    margin: 10px;
-}
-
-.message-textarea {
-    margin: 10px;
-    padding: 10px;
-    width: 200px;
-    height: 100px;
-}
-
-.flex-container {
-    margin-right: 88px;
-    flex-wrap: wrap;
-    align-items: center;
+.homepage-container {
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-around;
-}
-
-.curr-users-box {
-    margin: 39px;
-    align-self: baseline;
-    width: 10%;;
-}
-
-.convo-box {
-    padding: 23px;
-    border-radius: 10px;
-    width: fit-content;
-    height: fit-content;
-    border: 1px solid black;
-}
-
-.medium-font {
-    font-size: medium;
-}
-
-.view-messages-box {
-    min-height: 366px;
-    min-width: 226px;
-    border: 1px solid black;
-    border-radius: 10px;
-    order: -1;
-    width: 30%;
-    align-self: baseline;
-    text-align: center;
-}
-
-.message-box {
-    padding: 34px;
-    border: 4px solid black;
-    border-radius: 30px;
-    width: fit-content;
-    margin-top: 40px;
-}
-
-.view-mssg-title {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .home-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .convo-box {
+    width: 300px;
     padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .curr-convo-title {
+    font-size: 16px;
     font-weight: bold;
-}
+    margin-bottom: 10px;
+  }
+  
+  .view-messages-box {
+    width: 400px;
+    margin-left: 20px;
+  }
+  
+  .view-mssg-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .message-box {
+    margin-top: 20px;
+  }
+  
+  .send-mess-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .to-padding {
+    display: flex;
+    padding:5px;
+    width: 90%;
+    border-radius: 5px;
+  }
+  
+  .message-textarea {
+    display: flex;
+    width: 88%;
+    height: 50px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border-width: 2px;
+  }
+  
+  
+  
+  
+  
+  
+  .top-space {
+    margin-top: 10px;
+  }
+  
+  .curr-users-box {
+    width: 200px;
+    margin-left: 20px;
+  }
+  
+  .largeRound {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-top: 20px;
+  }
+  
+  
+  
+  .center-text {
+    text-align: center;
+  }
+  
+  /* Conversation Styling */
+  
+  
+  
+  
+  
+  .conversation-text {
+    font-size: 12px;
+  }
+  
+  .conversation-divider {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border-top: 1px solid #ccc;
+  }
+  
+  .conversation-thread{
+    cursor: pointer;
+  }
+.send-message-button{
+    
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      
+      .submit-message-button:hover {
+        background-color: #45a049;
+      }
+      
+      .submit-message-button:active {
+        background-color: #3e8e41;
+      }
+.convo-wrapper{
+    display:flex;
+    
+    border-radius: 20px;
+    border-color: black;
+   border:solid;
+   width: fit-content;
 
-/* text for messages */
-.mssg-text {
-    text-align: left;
-    padding-left: 24px;
+}
+.current-message{
+    display: flex;
+    width: 100%;
+    background-color: lightblue;
+    padding:3px;
+    border-radius:5px;
+    margin:3px;
+    
+}
+ 
+.delete-button{
+position:relative;
+margin-left:250px;
+width: 70%;
+cursor:pointer;
+display: inline-block;
+border: none;
+background-color: lightblue;
+
+
+
+
 }
