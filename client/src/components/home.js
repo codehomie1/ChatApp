@@ -244,13 +244,13 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
       // If it succeeded
       console.log("The apiRes message is: " + apiRes.message)
       var copeBypass = apiRes.message;
-      setInputUserPictureLink(copeBypass); // This will read the link to their profile picture for the "Other User"
+      //setInputUserPictureLink(copeBypass); // This will read the link to their profile picture for the "Other User"
     } else {
-      setErrorMessage(apiRes.message);
+      //setErrorMessage(apiRes.message);
     }
     console.log("Return value will be: " + copeBypass)
     console.log("return value is actually: " + <img src={copeBypass} />)
-    return <img src={copeBypass} />;
+    return {src: apiRes.message, userName: incomingUser};
   }
   // End re-write of the conversation example above
   // ____________________
@@ -258,6 +258,27 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
   // renders getConversations once
   // Also includes rendering getAllUsers
   React.useEffect(() => { getConversations(); getAllUsers(); }, []);
+
+
+
+  // new state variable for the mapping various images to messages (for use in active conversation profile pics)
+  const [imageMap, setImageMap] = React.useState({});
+
+  // As explained by Professor Parra on 5/18/2023
+  React.useEffect(() => {
+    // This will wait until all pictures are retrieved from the message thread
+    Promise.all(messageThread.map(message => getInputUserPicture(message.fromId)))
+    .then(results => { // Then it will print the results for debugging
+      console.log(results);
+      
+      const idToImage = {}; // Create a new object that will map usernames to images
+      results.forEach(result => idToImage[result.userName] = result.src); // For each user, map their image link into this with their username as key
+      console.log(idToImage);  // Print this map for debugging
+      setImageMap(idToImage);  // Then set the state variable equal to this new map so it can be used in the html
+    })
+   }, [messageThread]);
+  
+
 
   // Start of HTML display
   return (
@@ -295,12 +316,11 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
             <div className='view-mssg-title'>Active Conversation</div>
             <div></div>
             <div class="mssg-text">
-              {/* Change the image source later*/}
+              {/* Image source is now changed to use the picture of whoever sent the message (it is found in the imageMap using the fromId as a key*/}
               {messageThread.map(messageDto => <div class="current-message">
-              <ProfileImage className="chatSize" src={messageDto.userPicture} alt="Profile Image"   />
+              <ProfileImage className="chatSize" src={imageMap[messageDto.fromId]} alt="Profile Image"   />
                 {messageDto.fromId + " : " + messageDto.message}<br></br><button class="delete-button" onClick={() => handleDeleteMessage(messageDto)}> Unsend </button></div>)} </div>
             
-
             <div className='message-box'>
               <h3 className='send-mess-title'>Send Message</h3>
               <div>
