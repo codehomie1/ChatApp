@@ -107,8 +107,6 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
     setIsLoading(false);
   };
   async function handleDeleteMessage(messageDto) {
-
-
     console.log(messageDto);
     setIsLoading(true);
     setErrorMessage('');
@@ -278,6 +276,8 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
     <div className="homepage-container">
       <h1 className='home-title center-text'>Welcome {userName}</h1>
       <div className='flex-container'>
+
+
         <div className='message-box'>
           <h3 className='send-mess-title'>Send Message</h3>
           <div>
@@ -289,6 +289,8 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
             <div className='top-space'>{errorMessage}</div>
           </div>
         </div>
+
+
         <div>
           <div className='convo-box center-text'>
             <h3 className='curr-convo-title center-text'>Your Conversations</h3>
@@ -301,23 +303,19 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
             </>)} </div>
           </div>
         </div>
+
+        
         <div className='curr-users-box'>
           <h3>Current Users:</h3>
           {users.map(user => <div className='to-padding'> {user.userName} </div>)}
         </div>
+
+
         <div className='view-messages-box'>
-          {/* Placeholder name "Active Conversation", ideally plan to change to display the user you are messaging*/}
           <div className='view-mssg-title'>Active Conversation</div>
           <div></div>
           <div class="mssg-text">
             {messageThread.map(messageDto => <div>
-                                   {/* {getOtherUserPicture(messageDto.fromId)} 
-                                   <ProfileImage className="chatSize" src={otherUserPictureLink} alt="Profile Image"   />
-
-                                   Manual refresh button for debugging
-                                   <button onClick={() => getOtherUserPicture(messageDto.userPicture)}>Refresh</button>
-                                   */}
-
               <ProfileImage className="chatSize" src={messageDto.userPicture} alt="Profile Image"   />
               {messageDto.fromId + " : " + messageDto.message}<button onClick={() => handleDeleteMessage(messageDto)}> Delete </button></div>)} </div>
 
