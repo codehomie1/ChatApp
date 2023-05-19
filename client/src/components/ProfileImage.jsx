@@ -11,7 +11,7 @@ var defaultProfileImage = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-
 
 // Can take custom class name so the css can be switched, for use in different parts of the page like the chat box
 const ProfileImage = ({className, src, alt, ...props }) => {
-    const invalidSourceLink = (e) => { // If the supplied source link is invalid, default to the blank one (gray silouette image)
+    const invalidSourceLink = (e) => { // If the supplied source link is invalid, default to the invalid image link
         e.target.src = invalidSourceImage;
     }
     return (
@@ -22,7 +22,7 @@ const ProfileImage = ({className, src, alt, ...props }) => {
                 onError={invalidSourceLink} // If given source link does not work, then call the function above to use a different one (the error symbol)
             />
             ) : (<img {...props} className={`defaultFormatting ${className}`} // When no source is given, do this...
-                src={defaultProfileImage} // Use blank picture as the source
+                src={defaultProfileImage} // Use blank picture as the source (gray silouette image)
                 alt={alt} />
             )}
         </div>

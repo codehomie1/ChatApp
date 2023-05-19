@@ -259,8 +259,9 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
     } else {
       setErrorMessage(apiRes.message);
     }
-    console.log("Return value will be: ||" + copeBypass + "||")
-    return copeBypass
+    console.log("Return value will be: " + copeBypass)
+    console.log("return value is actually: " + <img src={copeBypass}/>)
+    return <img src={copeBypass}/>;
   }
   // End re-write of the conversation example above
   // ____________________
@@ -347,6 +348,18 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
             <div className='top-space'>{errorMessage}</div>
           </div>
         </div>
+        
+
+                {/* Renders the currently logged in user's profile picture in a big circle (largeRound) 
+                
+                Experiments to find out how to get a src to use a return value as an input
+
+                      <ProfileImage className="" src={getInputUserPicture(userName)} alt="Profile Image"   />
+
+                */}
+
+
+                
         
       </div> {/* Closing div of Flex container */}
 
