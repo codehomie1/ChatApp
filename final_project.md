@@ -18,3 +18,6 @@ I'm planning on having a way to upload profile pictures, and have them show up o
 
 If that works and I still have time I'd like to also have the ability to add reactions (upload a picture? or select from a few base ones)
 If that's not doable, then alternatively, readable timestamps for the messages because they don't seem to have any indicator right now and the existing timestamp variable is in epoch format (seems to be time offset of 1970)
+
+#Jaime's Feature
+It allows the user who is logged in to add as a friend all users created in the data base, also somoe CSS modification to make the buttons and friend list look better. 
