@@ -20,7 +20,7 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
   const [conversations, setConversations] = React.useState([]); // default empty array
   const [users, setUsers] = React.useState([]); // users array
 
-  async function addFriend(userName, friendName) {
+  async function addFriend(friendName) {
     const httpSettings = {
       method: 'POST',
       headers: {
@@ -32,24 +32,25 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
         friendName,
       }),
     };
-  
-    try {
-      const result = await fetch('/addFriends', httpSettings);
-      if (result.ok) {
+    const result = await fetch('/addFriends?friendName=' + friendName, httpSettings);
+
+    const apiRes = await result.json();
+      if (apiRes.status) {
         console.log('Friend added successfully.');
       } else {
         console.log('Failed to add friend.');
       }
-    } catch (error) {
-      console.log('An error occurred while adding friend.');
-    }
   }
 
-   //Function to handle adding user as friend
+  /*
+//Function to handle adding user as friend
    const handleAddFriend = (user) =>{
     setSelectedFriends((prevSelectedFriends)=> [...prevSelectedFriends, user.userName]);
-    addFriend(user, userName);
+    addFriend(userName);
   }
+  */
+
+
 
 
 
@@ -339,7 +340,7 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
             <div className='curr-users-box'>
           <h3>Current Users:</h3>
           {users.map(user => <div className='to-padding'> {user.userName} 
-          <button class="button1" onClick={() => handleAddFriend(user)}>Add Friend</button>
+          <button class="button1" onClick={() => addFriend(user.userName)}>Add Friend</button>
           </div>)}
           
         </div>

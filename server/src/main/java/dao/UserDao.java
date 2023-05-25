@@ -53,15 +53,16 @@ public class UserDao extends BaseDao<UserDto> {
   }
 
 
-  // Functions from Jaime's branch
-  public void update(Document filter, Document update) {
-    try {
-      collection.updateOne(filter, update);
-    } catch (Exception e) {
-      // Handle any exceptions that occur during the update process
-      e.printStackTrace();
-      // You can throw a custom exception or handle the error condition as per your application's requirements
-    }
+  public void changeDatabaseFriend(Document foundDocument, String friendName) {
+    Bson newValue = new Document("friendName", friendName);
+    System.out.println("Changing friend name to new value of: " + friendName);
+    Bson setNewValueInDatabase = new Document("$set", newValue); // According to MongoDB tutorial
+    System.out.println("Changing friend name setNewValueInDatabase is " + setNewValueInDatabase);
+
+    // Update the input friend name in the collection with the new input friendname value
+    collection.updateOne(foundDocument, setNewValueInDatabase);
+    System.out.println("Friend name in database should be updated now to: " + friendName);
+
   }
 
   public UserDto getByUsername(String username){

@@ -8,7 +8,7 @@ public class UserDto extends BaseDto{
   private String password;
 
   // Functions from Jaime's branch
-  private String friendName;
+  private String friendName = "";
 
   public String getFriendName(){
     return friendName;
@@ -64,7 +64,7 @@ public class UserDto extends BaseDto{
     userDto.setUserName(match.getString("userName"));
     userDto.setPassword(match.getString("password"));
     userDto.setProfilePic(match.getString("profilePic"));
-    userDto.setFriendName(match.getString("friends"));
+    userDto.setFriendName(match.getString("friendName"));
     return  userDto;
   }
 

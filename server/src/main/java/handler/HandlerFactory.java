@@ -26,8 +26,7 @@ public class HandlerFactory {
       case "/deleteMessage":
         return new DeleteMessageHandler();
       case "/addFriends":
-        UserDao userDao = UserDao.getInstance();
-        return new AddFriendHandler(userDao);
+        return new AddFriendHandler();
 
       default:
         return new FallbackHandler();

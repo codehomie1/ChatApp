@@ -5,40 +5,42 @@ import dto.UserDto;
 import org.bson.Document;
 import request.ParsedRequest;
 import response.HttpResponseBuilder;
+import response.RestApiAppResponse;
 //import response.StatusCodes;
 
 public class AddFriendHandler implements BaseHandler {
-    private static final int OK = 200;
-    private static final int BAD_REQUEST= 400;
-    private static final int NOT_FOUND = 404;
-    public UserDao userDao;
-
-    public AddFriendHandler(UserDao userDao) {
-        this.userDao = userDao;
-    }
-
 
     @Override
     public HttpResponseBuilder handleRequest(ParsedRequest request) {
-        // Retrieve the username and friendName from the request body or parameters
-        String userName = request.getBodyParameter("userName");
-        String friendName = request.getBodyParameter("friendName");
+        // Retrieve the friendname from query parameter
+        System.out.println("Inside friend handler");
+        String friendName = request.getQueryParam("friendName");
+        System.out.println("Found input friend name is: " + request.getQueryParam("friendName"));
 
-        // Check if both username and friendName are provided
-        if (userName == null || friendName == null) {
-            return new HttpResponseBuilder().setStatus(String.valueOf(BAD_REQUEST));
+        //friendName = "debugFriendName";
+
+        UserDao userDao = UserDao.getInstance();
+
+        AuthFilter.AuthResult authResult = AuthFilter.doFilter(request);
+
+        if(!authResult.isLoggedIn){
+            return new HttpResponseBuilder().setStatus(StatusCodes.UNAUTHORIZED);
         }
 
-        UserDto user = userDao.getByUsername(userName);
-        if(user == null){
-            return new HttpResponseBuilder().setStatus(String.valueOf(NOT_FOUND));
-        }
 
-        // Update the user's friend list
-        Document filter = new Document("userName", userName);
-        Document update = new Document("$addToSet", new Document("friends", friendName));
-        userDao.update(filter, update);
 
-        return new HttpResponseBuilder().setStatus(String.valueOf(OK));
+        // Experimental
+        var filter2 = new Document("userName", authResult.userName);
+        var foundUser = userDao.query(filter2);
+        System.out.println("Found user: " + foundUser);
+        System.out.println("Found user's username according to database is: " + foundUser.get(0).getUserName());
+        System.out.println("Setting user's friendName to " + friendName);
+        userDao.changeDatabaseFriend(filter2, friendName);
+        foundUser.get(0).setFriendName(friendName);
+        System.out.println("Should have set the friend now");
+
+        //return new HttpResponseBuilder().setStatus(String.valueOf(OK));
+        var res = new RestApiAppResponse<>(true, null, "The picture was changed");
+        return new HttpResponseBuilder().setStatus("200 OK").setBody(res);
     }
 }
