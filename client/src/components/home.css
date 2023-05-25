@@ -180,3 +180,55 @@ color:rgb(82, 6, 6);
 
 
 }
+
+
+
+/* Jaime's Feature's CSS */
+
+.box {
+  background-color: skyblue;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+  line-height: 1.4;
+}
+
+.box:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box .title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.box .content {
+  /* Additional styling for the content inside the box */
+}
+
+.button1 {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: skyblue;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button1:hover {
+  background-color: #45a049;
+}
+
+.button1:active {
+  background-color: #3e8e41;
+}

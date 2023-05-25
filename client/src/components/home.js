@@ -13,9 +13,45 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
   // New state variable for the message box where you can set a new user profile picture.
   const [changePictureBoxMessage, setChangePictureBoxMessage] = React.useState('');
 
+  // Const variable for the add friend feature, "new state variable for adding users"
+  const[selectedFriends, setSelectedFriends] = React.useState([]);
+
   // new state variable for list of convos
   const [conversations, setConversations] = React.useState([]); // default empty array
   const [users, setUsers] = React.useState([]); // users array
+
+  async function addFriend(userName, friendName) {
+    const httpSettings = {
+      method: 'POST',
+      headers: {
+      //  'Content-Type': 'application/json',
+        auth: cookies.get('auth'),
+      },
+      body: JSON.stringify({
+        userName,
+        friendName,
+      }),
+    };
+  
+    try {
+      const result = await fetch('/addFriends', httpSettings);
+      if (result.ok) {
+        console.log('Friend added successfully.');
+      } else {
+        console.log('Failed to add friend.');
+      }
+    } catch (error) {
+      console.log('An error occurred while adding friend.');
+    }
+  }
+
+   //Function to handle adding user as friend
+   const handleAddFriend = (user) =>{
+    setSelectedFriends((prevSelectedFriends)=> [...prevSelectedFriends, user.userName]);
+    addFriend(user, userName);
+  }
+
+
 
   async function getConversations() {
     const httpSettings = {
@@ -302,8 +338,14 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
 
             <div className='curr-users-box'>
           <h3>Current Users:</h3>
-          {users.map(user => <div className='to-padding'> {user.userName} </div>)}
+          {users.map(user => <div className='to-padding'> {user.userName} 
+          <button class="button1" onClick={() => handleAddFriend(user)}>Add Friend</button>
+          </div>)}
+          
         </div>
+
+        <div class="box"> Friend List: {selectedFriends.join(', ')} </div>
+
           </div>
         </div>
 
