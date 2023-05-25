@@ -37,6 +37,7 @@ function HomePage({ userName, setIsLoading, setErrorMessage, errorMessage, cooki
     const apiRes = await result.json();
       if (apiRes.status) {
         console.log('Friend added successfully.');
+        setSelectedFriends((prevSelectedFriends)=> [...prevSelectedFriends, friendName]);
       } else {
         console.log('Failed to add friend.');
       }
