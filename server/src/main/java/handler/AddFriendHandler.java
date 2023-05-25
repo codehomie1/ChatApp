@@ -39,8 +39,7 @@ public class AddFriendHandler implements BaseHandler {
         foundUser.get(0).setFriendName(friendName);
         System.out.println("Should have set the friend now");
 
-        //return new HttpResponseBuilder().setStatus(String.valueOf(OK));
-        var res = new RestApiAppResponse<>(true, null, "The picture was changed");
+        var res = new RestApiAppResponse<>(true, null, "The friend was changed");
         return new HttpResponseBuilder().setStatus("200 OK").setBody(res);
     }
 }
