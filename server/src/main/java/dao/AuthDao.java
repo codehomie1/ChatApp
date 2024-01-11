@@ -33,7 +33,6 @@ public class AuthDao extends BaseDao<AuthDto> {
     collection.insertOne(authDto.toDocument());
   }
 
-  // Todo use .find with a Document filter
   @Override
   public List<AuthDto> query(Document filter) {
     return collection.find(filter)

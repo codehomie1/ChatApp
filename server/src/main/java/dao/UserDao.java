@@ -31,9 +31,19 @@ public class UserDao extends BaseDao<UserDto> {
   }
 
   @Override
-  public void put(UserDto messageDto) {
-    collection.insertOne(messageDto.toDocument());
+  public void put(UserDto userdto) {
+    collection.insertOne(userdto.toDocument());
   }
+
+  @Override
+  public List<UserDto> query(Document filter){
+    return collection.find(filter)
+            .into(new ArrayList<>())
+            .stream()
+            .map(UserDto::fromDocument)
+            .collect(Collectors.toList());
+  }
+
 
 
   // Function to update user's profile image
@@ -74,13 +84,5 @@ public class UserDao extends BaseDao<UserDto> {
     return null;
   }
 
-
-  public List<UserDto> query(Document filter){
-    return collection.find(filter)
-        .into(new ArrayList<>())
-        .stream()
-        .map(UserDto::fromDocument)
-        .collect(Collectors.toList());
-  }
 
 }

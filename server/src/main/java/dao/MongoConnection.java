@@ -10,7 +10,7 @@ public class MongoConnection {
     private static MongoClient mongoClient = new MongoClient("localhost", 27017);
 
     public static MongoDatabase getDb(){
-        return mongoClient.getDatabase("Homework2");
+        return mongoClient.getDatabase("ChatAppDB");
     }
 
     public static MongoCollection<Document> getCollection(String collectionName){

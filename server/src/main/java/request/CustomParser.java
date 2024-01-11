@@ -14,6 +14,7 @@ public class CustomParser {
     var parts = requestParts[1].split("\\?");
     result.setPath(parts[0]);
 
+    // skips if query doesnt exist
     if(parts.length == 2){
       System.out.println(parts[1]);
       String[] queryParts = parts[1].split("&");

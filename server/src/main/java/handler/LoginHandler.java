@@ -5,11 +5,14 @@ import dao.UserDao;
 import dto.AuthDto;
 import java.time.Instant;
 import java.util.Map;
+
+import dto.UserDto;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.bson.Document;
 import request.ParsedRequest;
 import response.CustomHttpResponse;
 import response.HttpResponseBuilder;
+import response.RestApiAppResponse;
 
 class LoginDto{
   String userName;
@@ -30,9 +33,11 @@ public class LoginHandler implements BaseHandler{
         .append("userName", userDto.userName)
         .append("password",  DigestUtils.sha256Hex(userDto.password));
 
+
     var result = userDao.query(userQuery);
     if(result.size() == 0){
-      res.setStatus("401 Unauthorized");
+      res.setStatus("401 Unauthorized")
+      .setBody (new RestApiAppResponse<>(false, null, "login not found"));
     }else{
       AuthDto authDto = new AuthDto();
       authDto.setExpireTime(Instant.now().getEpochSecond() + 60000);
@@ -43,6 +48,7 @@ public class LoginHandler implements BaseHandler{
       res.setStatus("200 OK");
       //res.setHeaders(Map.of("Set-Cookie", "auth=" + hash));
       res.setHeader("Set-Cookie", "auth=" + hash);
+      res.setBody(new RestApiAppResponse<>(true, null, "login successful"));
     }
     return res;
   }

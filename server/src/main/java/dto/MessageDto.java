@@ -24,8 +24,6 @@ public class MessageDto extends BaseDto{
   }
 
 
-
-
   public String getFromId() {
     return fromId;
   }
