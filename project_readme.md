@@ -7,9 +7,9 @@ Each member will contribute 1 additional endpoint + a front end feature. It is u
 
 Each team member will receive and individual score based on their code contributions. 20% Shared score for the presentation. 
 
-# CodeHomies Feature
-My endpoint feature allows current logged in users to see a list of all registered users that could be a potential to start a conversation with.
-My front-end contributions includes includes
+# codehomies Feature
+My endpoint allows current logged in users to see a list of all registered users that could be a potential to start a conversation with.
+My front-end contributions includes includes.
 - styling login page
 - styling home page 
 
@@ -19,5 +19,16 @@ I'm planning on having a way to upload profile pictures, and have them show up o
 If that works and I still have time I'd like to also have the ability to add reactions (upload a picture? or select from a few base ones)
 If that's not doable, then alternatively, readable timestamps for the messages because they don't seem to have any indicator right now and the existing timestamp variable is in epoch format (seems to be time offset of 1970)
 
-#Jaime's Feature
-It allows the user who is logged in to add as a friend all users created in the data base, also somoe CSS modification to make the buttons and friend list look better. 
+# Jaime's Feature
+It allows the user who is logged in to add as a friend all users created in the data base, also some CSS modification to make the buttons and friend list look better. 
+
+
+# Tech Stack
+Frontend: Node.js, React <br>
+Backend: Java, MongoDb 
+
+# Page Screenshots
+| Login/Register Page                 |                Home Page                   |
+|-------------------------------------|--------------------------------------------|
+| ![Alt ](client\public\homepage.jpg) |  ![Alt text 2](client\public\landing.jpg)  |
+  
